@@ -1,7 +1,7 @@
 package Model;
 
 public abstract class Monster extends Enemy {
-    Integer visionRange;
+    protected Integer visionRange;
 
     public void onEnemyTurn() {
 //        The monster will attempt to traverse around the board.
@@ -26,5 +26,13 @@ public abstract class Monster extends Enemy {
 //    }
 //    else
 //        Perform a random movement action: left, right, up, down or stay at the same place.
+    }
+
+    @Override
+    public String describe() {
+        //returns full information of the current unit (don’t forget to
+        //override this method in each subclass). Use it to print the information of each unit during
+        //combat / on player’s turn.
+        throw new UnsupportedOperationException();
     }
 }

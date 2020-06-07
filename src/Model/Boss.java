@@ -1,11 +1,11 @@
 package Model;
+
 //– The Mountain
 //– Queen Cersei
 //– Night’s King
 public abstract class Boss extends Monster implements HeroicUnit {
-    Integer visionRange;
-    Integer abilityFrequency;
-    Integer combatTicks;
+    protected Integer abilityFrequency;
+    protected Integer combatTicks;
 
     public void onEnemyTurn() {
 //        ∗ The boss will attempt to traverse around the board.
@@ -36,5 +36,13 @@ public abstract class Boss extends Monster implements HeroicUnit {
 //        else
 //          combatTicks = 0
 //        Perform a random movement action: left, right, up, down or stay in the same place.
+    }
+
+    @Override
+    public String describe() {
+        //returns full information of the current unit (don’t forget to
+        //override this method in each subclass). Use it to print the information of each unit during
+        //combat / on player’s turn.
+        throw new UnsupportedOperationException();
     }
 }

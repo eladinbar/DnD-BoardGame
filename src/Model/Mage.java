@@ -3,12 +3,12 @@ package Model;
 public class Mage extends Player {
     //Special ability: Blizzard, randomly hit enemies within range for an amount equals to the mage’s
     //spell power at the cost of mana.
-    Integer manaPool;
-    Integer currentMana;
-    Integer manaCost;
-    Integer spellPower;
-    Integer hitsCount;
-    Integer abilityRange;
+    private Integer manaPool;
+    private Integer currentMana;
+    private Integer manaCost;
+    private Integer spellPower;
+    private Integer hitsCount;
+    private Integer abilityRange;
 
     public Mage() {
         //insert initializers
@@ -27,7 +27,7 @@ public class Mage extends Player {
     }
 
     @Override
-    public void castAbility() throws Exception {
+    public void castAbility(/*insert parameters*/) throws Exception {
         if (currentMana < manaCost)
             throw new Exception(/*Insert appropriate message*/);
         else {
@@ -40,5 +40,13 @@ public class Mage extends Player {
                 hits++;
             }
         }
+    }
+
+    @Override
+    public String describe() {
+        //returns full information of the current unit (don’t forget to
+        //override this method in each subclass). Use it to print the information of each unit during
+        //combat / on player’s turn.
+        throw new UnsupportedOperationException();
     }
 }

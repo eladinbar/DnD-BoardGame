@@ -1,9 +1,9 @@
 package Model;
 
 public abstract class Player extends Unit implements HeroicUnit {
-    Integer experience;
-    Integer level;
-    Integer experienceThreshold;
+    protected Integer experience;
+    protected Integer level;
+    protected Integer experienceThreshold;
 
     public Player() {
         this.experience = 0;
@@ -18,5 +18,13 @@ public abstract class Player extends Unit implements HeroicUnit {
         currentHealth = healthPool;
         attack += 4 * level;
         defense += level;
+    }
+
+    @Override
+    public String describe() {
+        //returns full information of the current unit (don’t forget to
+        //override this method in each subclass). Use it to print the information of each unit during
+        //combat / on player’s turn.
+        throw new UnsupportedOperationException();
     }
 }

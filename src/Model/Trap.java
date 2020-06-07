@@ -1,10 +1,10 @@
 package Model;
 
 public class Trap extends Enemy {
-    Integer visibilityTime;
-    Integer invisibilityTime;
-    Integer tickCount;
-    Boolean visible;
+    private Integer visibilityTime;
+    private Integer invisibilityTime;
+    private Integer tickCount;
+    private Boolean visible;
 
     public void onEnemyTurn() {
 //        – A trap can’t move (unlike monsters), but updates its state (visibility) on each turn.
@@ -19,5 +19,15 @@ public class Trap extends Enemy {
 //          ticksCount++;
 //        if range(trap, player) < 2
 //          attack(player)
+    }
+
+    @Override
+    public String describe() {
+        //returns full information of the current unit (don’t forget to
+        //override this method in each subclass). Use it to print the information of each unit during
+        //combat / on player’s turn.
+        // You can override the Trap :: toString() method so it returns different characters depending
+        //on its visibility state.
+        throw new UnsupportedOperationException();
     }
 }

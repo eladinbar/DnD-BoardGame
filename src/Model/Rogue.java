@@ -1,8 +1,8 @@
 package Model;
 
 public class Rogue extends Player {
-    Integer cost;
-    Integer currentEnergy;
+    private Integer cost;
+    private Integer currentEnergy;
 
     public Rogue() {
         //insert initializers here
@@ -11,6 +11,7 @@ public class Rogue extends Player {
 
     @Override
     public void levelUp() {
+        super.levelUp();
         currentEnergy = 100;
         attack += 3 * level;
     }
@@ -20,7 +21,7 @@ public class Rogue extends Player {
     }
 
     @Override
-    public void castAbility() throws Exception {
+    public void castAbility(/*insert parameters*/) throws Exception {
         if (currentEnergy < cost) {
             throw new Exception(/*insert appropriate message*/);
         }
@@ -29,5 +30,13 @@ public class Rogue extends Player {
             //For each enemy within range < 2, deal damage (reduce health value) equals to the rogue’s
             //attack points (each enemy will try to defend itself).
         }
+    }
+
+    @Override
+    public String describe() {
+        //returns full information of the current unit (don’t forget to
+        //override this method in each subclass). Use it to print the information of each unit during
+        //combat / on player’s turn.
+        throw new UnsupportedOperationException();
     }
 }
