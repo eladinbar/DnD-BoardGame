@@ -3,10 +3,11 @@ package Model;
 //– The Mountain
 //– Queen Cersei
 //– Night’s King
-public abstract class Boss extends Monster implements HeroicUnit {
+public class Boss extends Monster implements HeroicUnit {
     protected Integer abilityFrequency;
     protected Integer combatTicks;
 
+    @Override
     public void onEnemyTurn() {
 //        ∗ The boss will attempt to traverse around the board.
 //        ∗ Boss can move 1 step in the following directions: Up/Down/Left/Right, and may chase the
@@ -36,6 +37,11 @@ public abstract class Boss extends Monster implements HeroicUnit {
 //        else
 //          combatTicks = 0
 //        Perform a random movement action: left, right, up, down or stay in the same place.
+    }
+
+    @Override
+    public void castAbility(/*insert parameters*/) throws Exception {
+
     }
 
     @Override
