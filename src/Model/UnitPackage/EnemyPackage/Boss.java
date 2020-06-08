@@ -1,4 +1,6 @@
-package Model;
+package Model.UnitPackage.EnemyPackage;
+
+import Model.UnitPackage.HeroicUnit;
 
 //– The Mountain
 //– Queen Cersei

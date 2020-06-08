@@ -1,4 +1,7 @@
-package Model;
+package Model.UnitPackage.PlayerPackage;
+
+import Model.UnitPackage.HeroicUnit;
+import Model.UnitPackage.Unit;
 
 public abstract class Player extends Unit implements HeroicUnit {
     protected Integer experience;

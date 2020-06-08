@@ -1,4 +1,4 @@
-package Model;
+package Model.UnitPackage.EnemyPackage;
 
 public class Trap extends Enemy {
     private Integer visibilityTime;

@@ -1,4 +1,4 @@
-package Model;
+package Model.UnitPackage.PlayerPackage;
 
 public class Hunter extends Player {
     //Special ability: Shoot, hits the closest enemy for an amount equals to the hunter’s attack points at

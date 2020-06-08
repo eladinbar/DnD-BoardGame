@@ -1,4 +1,4 @@
-package Model;
+package Model.UnitPackage.EnemyPackage;
 
 public abstract class Monster extends Enemy {
     protected Integer visionRange;
