@@ -1,8 +1,8 @@
 package Model.UnitPackage.PlayerPackage;
 
 public enum Mages {
-    MELISANDRE("Melisandre", 100, 5, 1, 300, 30, 15, 5, 6, 1),
-    THOROS_OF_MYR("Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4, 2);
+    MELISANDRE("Melisandre", 100, 5, 1, 300, 30, 15, 5, 6, 3),
+    THOROS_OF_MYR("Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4, 4);
 
     String name;
     int healthPool;

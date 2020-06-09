@@ -1,7 +1,7 @@
 package Model.UnitPackage.PlayerPackage;
 
 public enum Hunters {
-    YGRITTE("Ygritte", 220, 30, 2, 6, 1);
+    YGRITTE("Ygritte", 220, 30, 2, 6, 7);
 
     String name;
     int healthPool;

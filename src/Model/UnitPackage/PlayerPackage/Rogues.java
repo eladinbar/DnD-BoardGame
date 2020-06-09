@@ -1,8 +1,8 @@
 package Model.UnitPackage.PlayerPackage;
 
 public enum Rogues {
-    ARYA_STARK("Arya Stark", 150, 40, 2, 20, 1),
-    BRONN("Bronn", 250, 35, 3, 50, 2);
+    ARYA_STARK("Arya Stark", 150, 40, 2, 20, 5),
+    BRONN("Bronn", 250, 35, 3, 50, 6);
 
     String name;
     int healthPool;
