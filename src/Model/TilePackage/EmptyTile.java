@@ -1,5 +1,10 @@
 package Model.TilePackage;
 
-public class EmptyTile extends Tile {
+import java.awt.*;
 
+public class EmptyTile extends Tile {
+    public EmptyTile(Point position, char symbol) {
+        super(position);
+        symbol = '#';
+    }
 }

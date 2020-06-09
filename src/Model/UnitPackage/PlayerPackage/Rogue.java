@@ -1,10 +1,13 @@
 package Model.UnitPackage.PlayerPackage;
 
+import java.awt.*;
+
 public class Rogue extends Player {
     private Integer energyCost;
     private Integer currentEnergy;
 
-    public Rogue(Rogues rogue) {
+    public Rogue(Point position, Rogues rogue) {
+        super(position);
         this.name = rogue.name;
         this.healthPool = rogue.healthPool;
         this.currentHealth = healthPool;
@@ -40,9 +43,10 @@ public class Rogue extends Player {
 
     @Override
     public String describe() {
-        //returns full information of the current unit (don’t forget to
-        //override this method in each subclass). Use it to print the information of each unit during
-        //combat / on player’s turn.
-        throw new UnsupportedOperationException();
+        return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%14s", "Attack: ") + attack + String.format("%14s", "Defense: ")
+                + defense + String.format("%14s", "Level: ") + level + String.format("%16s", "Experience: ") + experience+"/"+experienceThreshold +
+                String.format("%15s", "Energy: ") + currentEnergy+"/"+energyCost;
+        //returns full information on the current unit.
+        //Use it to print the information of each unit during combat / on player turn.
     }
 }

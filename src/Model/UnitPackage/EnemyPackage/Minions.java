@@ -16,7 +16,6 @@ public enum Minions {
     int defense;
     int visionRange;
     int experienceValue;
-    int menuPosition;
 
     Minions(String name, char symbol, int healthPool, int attack, int defense, int visionRange, int experienceValue) {
         this.name = name;
@@ -26,6 +25,5 @@ public enum Minions {
         this.defense = defense;
         this.visionRange = visionRange;
         this.experienceValue = experienceValue;
-        this.menuPosition = menuPosition;
     }
 }

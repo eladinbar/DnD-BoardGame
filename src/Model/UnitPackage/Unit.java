@@ -2,12 +2,18 @@ package Model.UnitPackage;
 
 import Model.TilePackage.Tile;
 
+import java.awt.*;
+
 public abstract class Unit extends Tile {
     protected String name;
     protected Integer healthPool;
     protected Integer currentHealth;
     protected Integer attack;
     protected Integer defense;
+
+    public Unit(Point position) {
+        super(position);
+    }
 
     public String getName() {
         //Returns the name of the unit. Use it to print the names upon combat

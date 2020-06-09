@@ -1,5 +1,7 @@
 package Model.UnitPackage.PlayerPackage;
 
+import java.awt.*;
+
 public class Hunter extends Player {
     //Special ability: Shoot, hits the closest enemy for an amount equals to the hunter’s attack points at
     //the cost of an arrow.
@@ -7,7 +9,8 @@ public class Hunter extends Player {
     private Integer arrowsCount;
     private Integer ticksCount;
 
-    public Hunter(Hunters hunter) {
+    public Hunter(Point position, Hunters hunter) {
+        super(position);
         this.name = hunter.name;
         this.healthPool = hunter.healthPool;
         this.currentHealth = healthPool;
@@ -51,9 +54,10 @@ public class Hunter extends Player {
 
     @Override
     public String describe() {
-        //returns full information of the current unit (don’t forget to
-        //override this method in each subclass). Use it to print the information of each unit during
-        //combat / on player’s turn.
-        throw new UnsupportedOperationException();
+        return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%14s", "Attack: ") + attack + String.format("%14s", "Defense: ")
+                + defense + String.format("%14s", "Level: ") + level + String.format("%16s", "Experience: ") + experience+"/"+experienceThreshold +
+                String.format("%15s", "Arrows: ") + arrowsCount + String.format("%14s", "Range: ") + range;
+        //returns full information on the current unit.
+        //Use it to print the information of each unit during combat / on player turn.
     }
 }
