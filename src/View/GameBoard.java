@@ -1,6 +1,6 @@
 package View;
 
-import Model.Tile;
+import Model.TilePackage.*;
 
 public class GameBoard implements GameInfo {
 
@@ -16,8 +16,19 @@ public class GameBoard implements GameInfo {
         return boardWidth;
     }
 
+    public GameBoard(Tile[][] layout, int length, int width){
+        this.layout = layout;
+        this.boardLength = length;
+        this.boardWidth = width;
+    }
+
     @Override
     public void printInfo() {
-
+        for (int j = 0; j < layout[0].length; j++) {
+            for (int i = 0; i < layout.length; i++) {
+                System.out.print(layout[i][j]);
+            }
+            System.out.println();
+        }
     }
 }

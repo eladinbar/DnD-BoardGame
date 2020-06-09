@@ -1,6 +1,6 @@
 package Controller;
-import Model.Enemy;
-import Model.Player;
+import Model.UnitPackage.EnemyPackage.*;
+import Model.UnitPackage.PlayerPackage.*;
 import Model.TickListener;
 import View.*;
 

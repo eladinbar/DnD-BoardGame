@@ -1,12 +1,14 @@
 package Model.UnitPackage.EnemyPackage;
 
+import java.awt.*;
+
 public class Trap extends Enemy {
     private Integer visibilityTime;
     private Integer invisibilityTime;
     private Integer tickCount;
     private Boolean visible;
 
-    public Trap(Traps trap) {
+    public Trap(Traps trap, Point position) {
         this.name = trap.name;
         this.symbol = trap.symbol;
         this.healthPool = trap.healthPool;

@@ -27,4 +27,8 @@ public enum Mages {
         this.abilityRange = abilityRange;
         this.menuPosition = menuPosition;
     }
+
+    public int getMenuPosition() {
+        return menuPosition;
+    }
 }

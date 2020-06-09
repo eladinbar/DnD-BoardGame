@@ -1,43 +1,40 @@
 package View;
 
-import Model.*;
+import Model.UnitPackage.PlayerPackage.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PlayerSelectionMenu implements GameInfo {
-    private List<Warrior> warrioresList;
-    private List<Rogue> roguesList;
-    private List<Mage> magesList;
-    private List<Hunter> huntersList;
+    private List<String> warriorsList;
+    private List<String> roguesList;
+    private List<String> magesList;
+    private List<String> huntersList;
 
     public PlayerSelectionMenu(){
-        //use lambda expresion o the enums to create the  individual lists.
+        warriorsList = Arrays.stream(Warriors.values()).
+                map((character) -> character.getMenuPosition() + ". "  + new Warrior(character).describe()).collect(Collectors.toList());
+        roguesList = Arrays.stream(Rogues.values()).
+                map((character) ->  character.getMenuPosition() + ". "  + new Rogue(character).describe()).collect(Collectors.toList());
+        magesList = Arrays.stream(Mages.values()).
+                map((character) ->  character.getMenuPosition() + ". " + new Mage(character).describe()).collect(Collectors.toList());
+        huntersList = Arrays.stream(Hunters.values()).
+                map((character) ->  character.getMenuPosition() + ". "  + new Hunter(character).describe()).collect(Collectors.toList());
     }
 
     @Override
     public void printInfo() {
         System.out.println("Welcome to \"Game of Thrones Dungeon\". Get ready for your quest.");
         System.out.println("Choose Player: ");
-        int characterMenuPosition = 1;
-        for (Warrior w: warrioresList) {
-            System.out.println(characterMenuPosition + ". " + w.describe());
-            characterMenuPosition++;
-        }
-        for (Mage m: magesList) {
-            System.out.println(characterMenuPosition + ". " + m.describe());
-            characterMenuPosition++;
-        }
-        for (Rogue r: roguesList) {
-            System.out.println(characterMenuPosition + ". " + r.describe());
-            characterMenuPosition++;
-        }
-        for (Hunter h: huntersList) {
-            System.out.println(characterMenuPosition + ". " + h.describe());
-            characterMenuPosition++;
-        }
+        warriorsList.stream().forEach((x) -> System.out.println(x));
+        magesList.stream().forEach((x) -> System.out.println(x));
+        roguesList.stream().forEach((x) -> System.out.println(x));
+        huntersList.stream().forEach((x) -> System.out.println(x));
     }
 
-    public void SelectPlayer(char choice){
 
-    }
+
+
+
 }

@@ -2,6 +2,8 @@ package Model.UnitPackage.EnemyPackage;
 
 import Model.UnitPackage.HeroicUnit;
 
+import java.awt.*;
+
 //– The Mountain
 //– Queen Cersei
 //– Night’s King
@@ -9,7 +11,7 @@ public class Boss extends Monster implements HeroicUnit {
     protected Integer abilityFrequency;
     protected Integer combatTicks;
 
-    public Boss(Bosses boss) {
+    public Boss(Bosses boss, Point position) {
         this.name = boss.name;
         this.symbol = boss.symbol;
         this.healthPool = boss.healthPool;

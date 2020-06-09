@@ -19,4 +19,8 @@ public enum Warriors {
         this.abilityCooldown = abilityCooldown;
         this.menuPosition = menuPosition;
     }
+
+    public int getMenuPosition() {
+        return menuPosition;
+    }
 }
