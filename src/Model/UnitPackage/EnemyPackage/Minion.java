@@ -27,24 +27,24 @@ public class Minion extends Monster {
 //        – Monsters can move 1 step in the following directions: Up/Down/Left/Right, and may chase
 //        the player if the player is within its vision range.
 //        – Movement rules described as follows:
+        int dx; int dy;
         if (this.range(player) < visionRange) {
-            this.position.x = this.position.x - player.position.x;
-            this.position.y = this.position.y - player.position.y;
-            if (Math.abs(this.position.x) > Math.abs(this.position.y)) {
-              if (this.position.x > 0)
-                  Move left
-              else
-                  Move right
-              }
+            dx = this.position.x - player.position.x;
+            dy = this.position.y - player.position.y;
+            if (Math.abs(dx) > Math.abs(dy)) {
+                if (dx > 0)
+                     Move left
+                else
+                     Move right
+            }
+            else
+                if (dy > 0)
+                    Move up
+                else
+                    Move down
         }
         else
-            if (this.position.y > 0)
-                Move up
-            else
-                Move down
-    }
-    else
-        Perform a random movement action: left, right, up, down or stay at the same place.
+            Perform a random movement action: left, right, up, down or stay at the same place.
     }
 
     @Override

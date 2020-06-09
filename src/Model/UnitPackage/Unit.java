@@ -5,7 +5,7 @@ import Model.TilePackage.Visitor;
 
 import java.awt.Point;
 
-public abstract class Unit extends Tile implements Visitor {
+public abstract class Unit extends Tile implements Visitor, Attacker, Defender {
     protected String name;
     protected Integer healthPool;
     protected Integer currentHealth;

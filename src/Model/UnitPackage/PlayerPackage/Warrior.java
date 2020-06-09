@@ -3,6 +3,7 @@ package Model.UnitPackage.PlayerPackage;
 import Model.TilePackage.EmptyTile;
 import Model.TilePackage.Visitor;
 import Model.TilePackage.Wall;
+import Model.UnitPackage.EnemyPackage.Enemy;
 import Model.UnitPackage.Unit;
 
 import java.awt.Point;
@@ -62,6 +63,11 @@ public class Warrior extends Player {
     }
 
     @Override
+    public void accept(Visitor visitor) {
+
+    }
+
+    @Override
     public void visit(Unit unit) {
 
     }
@@ -77,7 +83,17 @@ public class Warrior extends Player {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void attack(Player player) {
+
+    }
+
+    @Override
+    public void attack(Enemy enemy) {
+
+    }
+
+    @Override
+    public void defend(Unit unit) {
 
     }
 }
