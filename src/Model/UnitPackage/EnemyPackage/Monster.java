@@ -1,19 +1,57 @@
 package Model.UnitPackage.EnemyPackage;
 
+import Model.TilePackage.EmptyTile;
+import Model.TilePackage.Tile;
+import Model.UnitPackage.Visitor;
+import Model.TilePackage.Wall;
+import Model.UnitPackage.PlayerPackage.Player;
+
 import java.awt.Point;
 
-public abstract class Monster extends Enemy {
+public abstract class Monster extends Enemy implements Visitor {
     protected Integer visionRange;
 
     public Monster(Point position) {
         super(position);
     }
 
+    public void interact(Tile tile) {
+        tile.accept(this);
+    }
+
     @Override
-    public String describe() {
-        //returns full information of the current unit (don’t forget to
-        //override this method in each subclass). Use it to print the information of each unit during
-        //combat / on player’s turn.
-        throw new UnsupportedOperationException();
+    public void visit(Enemy enemy) {
+        //Do nothing
+    }
+
+    @Override
+    public void visit(Player player) {
+        this.engage(player);
+    }
+
+    @Override
+    public void visit(Wall wall) {
+        //Do nothing
+    }
+
+    @Override
+    public void visit(EmptyTile emptyTile) {
+        this.setPosition(emptyTile.getPosition());
+    }
+
+    protected void moveLeft() {
+        this.position.x -= 1;
+    }
+
+    protected void moveRight() {
+        this.position.x += 1;
+    }
+
+    protected void moveUp() {
+        this.position.y += 1;
+    }
+
+    protected void moveDown() {
+        this.position.y -= 1;
     }
 }

@@ -1,5 +1,7 @@
-package Model.TilePackage;
+package Model.UnitPackage;
 
+import Model.TilePackage.EmptyTile;
+import Model.TilePackage.Wall;
 import Model.UnitPackage.EnemyPackage.Enemy;
 import Model.UnitPackage.PlayerPackage.Player;
 

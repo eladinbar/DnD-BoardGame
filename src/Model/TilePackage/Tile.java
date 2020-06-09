@@ -2,7 +2,7 @@ package Model.TilePackage;
 
 import java.awt.Point;
 
-public abstract class Tile implements Visitor, Visited {
+public abstract class Tile implements Visited {
     protected Point position;
     protected char symbol;
 
@@ -18,7 +18,18 @@ public abstract class Tile implements Visitor, Visited {
         return position;
     }
 
+    @Override
     public String toString() {
         return "" + symbol;
+    }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+
+    public void switchPosition(Tile other) {
+        Point originalPosition = this.position;
+        this.position = other.position;
+        other.position = originalPosition;
     }
 }

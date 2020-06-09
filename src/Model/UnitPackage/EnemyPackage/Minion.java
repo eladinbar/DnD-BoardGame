@@ -1,10 +1,6 @@
 package Model.UnitPackage.EnemyPackage;
 
-import Model.TilePackage.EmptyTile;
-import Model.TilePackage.Visitor;
-import Model.TilePackage.Wall;
 import Model.UnitPackage.PlayerPackage.Player;
-import Model.UnitPackage.Unit;
 
 import java.awt.Point;
 
@@ -22,6 +18,7 @@ public class Minion extends Monster {
         this.experienceValue = minion.experienceValue;
     }
 
+    @Override
     public void onEnemyTurn(Player player) {
 //        The monster will attempt to traverse around the board.
 //        – Monsters can move 1 step in the following directions: Up/Down/Left/Right, and may chase
@@ -29,22 +26,42 @@ public class Minion extends Monster {
 //        – Movement rules described as follows:
         int dx; int dy;
         if (this.range(player) < visionRange) {
-            dx = this.position.x - player.position.x;
-            dy = this.position.y - player.position.y;
+            dx = this.position.x - player.getPosition().x;
+            dy = this.position.y - player.getPosition().y;
             if (Math.abs(dx) > Math.abs(dy)) {
                 if (dx > 0)
-                     Move left
+                     this.moveLeft();
                 else
-                     Move right
+                     this.moveRight();
             }
             else
                 if (dy > 0)
-                    Move up
+                    this.moveDown();
                 else
-                    Move down
+                    this.moveUp();
         }
         else
-            Perform a random movement action: left, right, up, down or stay at the same place.
+            this.randomMovement();
+    }
+
+    private void randomMovement() {
+        int rand = (int)Math.random()*5;
+        switch(rand) {
+            case 0:
+                break;
+            case 1:
+                this.moveLeft();
+                break;
+            case 2:
+                this.moveRight();
+                break;
+            case 3:
+                this.moveUp();
+                break;
+            case 4:
+                this.moveDown();
+                break;
+        }
     }
 
     @Override
@@ -53,25 +70,5 @@ public class Minion extends Monster {
                 + defense + String.format("%21s", "Experience Value: ") + experienceValue + String.format("%17s", "Vision Range: ") + visionRange;
         //returns full information of the current unit.
         //Use it to print the information of each unit during combat / on player’s turn.
-    }
-
-    @Override
-    public void visit(Unit unit) {
-
-    }
-
-    @Override
-    public void visit(Wall wall) {
-
-    }
-
-    @Override
-    public void visit(EmptyTile emptyTile) {
-
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
-
     }
 }
