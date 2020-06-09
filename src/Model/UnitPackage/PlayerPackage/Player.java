@@ -3,13 +3,16 @@ package Model.UnitPackage.PlayerPackage;
 import Model.UnitPackage.HeroicUnit;
 import Model.UnitPackage.Unit;
 
+import java.awt.Point;
+
 public abstract class Player extends Unit implements HeroicUnit {
     protected Integer experience;
     protected Integer level;
     protected Integer experienceThreshold;
 
-    public Player() {
-        this.symbol = '@';
+    public Player(Point position) {
+        super(position);
+        this.symbol = PlayerStatus.ALIVE.playerStatus;
         this.experience = 0;
         this.level = 1;
         this.experienceThreshold = 50 * level;
@@ -22,13 +25,5 @@ public abstract class Player extends Unit implements HeroicUnit {
         currentHealth = healthPool;
         attack += 4 * level;
         defense += level;
-    }
-
-    @Override
-    public String describe() {
-        //returns full information of the current unit (don’t forget to
-        //override this method in each subclass). Use it to print the information of each unit during
-        //combat / on player’s turn.
-        throw new UnsupportedOperationException();
     }
 }

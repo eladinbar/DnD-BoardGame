@@ -1,5 +1,12 @@
 package Model.UnitPackage.PlayerPackage;
 
+import Model.TilePackage.EmptyTile;
+import Model.TilePackage.Visitor;
+import Model.TilePackage.Wall;
+import Model.UnitPackage.Unit;
+
+import java.awt.Point;
+
 public class Warrior extends Player {
     //Special ability: Avenger’s Shield, randomly hits one enemy withing range < 3 for an amount that
     //equals to 10% of the warrior’s max health and heals the warrior for an amount equal to (10×defense)
@@ -7,8 +14,8 @@ public class Warrior extends Player {
     private Integer abilityCooldown;
     private Integer remainingCooldown;
 
-    public Warrior(Warriors warrior) {
-        super();
+    public Warrior(Point position, Warriors warrior) {
+        super(position);
         this.name = warrior.name;
         this.healthPool = warrior.healthPool;
         this.currentHealth = healthPool;
@@ -47,11 +54,30 @@ public class Warrior extends Player {
 
     @Override
     public String describe() {
-        return name + "                Health: " + currentHealth+"/"+healthPool + "         Attack: " + attack
-                + "              Defense: " + defense + "              Level: " + level + "                Experience: " + experience+"/"+experienceThreshold
-                + "               Cooldown: " + remainingCooldown+"/"+abilityCooldown;
-        //returns full information of the current unit (don’t forget to
-        //override this method in each subclass). Use it to print the information of each unit during
-        //combat / on player’s turn.
+        return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%14s", "Attack: ") + attack + String.format("%14s", "Defense: ")
+                + defense + String.format("%14s", "Level: ") + level + String.format("%16s", "Experience: ") + experience+"/"+experienceThreshold +
+                String.format("%15s", "Cooldown: ") + remainingCooldown+"/"+abilityCooldown;
+        //returns full information on the current unit.
+        //Use it to print the information of each unit during combat / on player turn.
+    }
+
+    @Override
+    public void visit(Unit unit) {
+
+    }
+
+    @Override
+    public void visit(Wall wall) {
+
+    }
+
+    @Override
+    public void visit(EmptyTile emptyTile) {
+
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+
     }
 }

@@ -1,7 +1,14 @@
 package Model.UnitPackage.EnemyPackage;
 
+import java.awt.Point;
+
 public abstract class Monster extends Enemy {
     protected Integer visionRange;
+
+    public Monster(Point position) {
+        super(position);
+    }
+
 
     public void onEnemyTurn() {
 //        The monster will attempt to traverse around the board.

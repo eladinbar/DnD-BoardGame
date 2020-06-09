@@ -1,8 +1,12 @@
 package Model.UnitPackage.EnemyPackage;
 
+import Model.TilePackage.EmptyTile;
+import Model.TilePackage.Visitor;
+import Model.TilePackage.Wall;
 import Model.UnitPackage.HeroicUnit;
+import Model.UnitPackage.Unit;
 
-import java.awt.*;
+import java.awt.Point;
 
 //– The Mountain
 //– Queen Cersei
@@ -11,7 +15,8 @@ public class Boss extends Monster implements HeroicUnit {
     protected Integer abilityFrequency;
     protected Integer combatTicks;
 
-    public Boss(Bosses boss, Point position) {
+    public Boss(Point position, Bosses boss) {
+        super(position);
         this.name = boss.name;
         this.symbol = boss.symbol;
         this.healthPool = boss.healthPool;
@@ -63,9 +68,29 @@ public class Boss extends Monster implements HeroicUnit {
 
     @Override
     public String describe() {
-        //returns full information of the current unit (don’t forget to
-        //override this method in each subclass). Use it to print the information of each unit during
-        //combat / on player’s turn.
-        throw new UnsupportedOperationException();
+        return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%12s", "Attack: ") + attack + String.format("%13s", "Defense: ")
+                + defense + String.format("%20s", "Experience Value: ") + experienceValue + String.format("%17s", "Vision Range: ") + visionRange;
+        //returns full information of the current unit.
+        //Use it to print the information of each unit during combat / on player’s turn.
+    }
+
+    @Override
+    public void visit(Unit unit) {
+
+    }
+
+    @Override
+    public void visit(Wall wall) {
+
+    }
+
+    @Override
+    public void visit(EmptyTile emptyTile) {
+
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+
     }
 }

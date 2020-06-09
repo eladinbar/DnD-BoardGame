@@ -1,5 +1,10 @@
 package Model.UnitPackage.EnemyPackage;
 
+import Model.TilePackage.EmptyTile;
+import Model.TilePackage.Visitor;
+import Model.TilePackage.Wall;
+import Model.UnitPackage.Unit;
+
 import java.awt.*;
 
 public class Trap extends Enemy {
@@ -8,10 +13,12 @@ public class Trap extends Enemy {
     private Integer tickCount;
     private Boolean visible;
 
-    public Trap(Traps trap, Point position) {
+    public Trap(Point position, Traps trap) {
+        super(position);
         this.name = trap.name;
         this.symbol = trap.symbol;
         this.healthPool = trap.healthPool;
+        this.currentHealth = healthPool;
         this.attack = trap.attack;
         this.defense = trap.defense;
         this.experienceValue = trap.experienceValue;
@@ -38,11 +45,31 @@ public class Trap extends Enemy {
 
     @Override
     public String describe() {
-        //returns full information of the current unit (don’t forget to
-        //override this method in each subclass). Use it to print the information of each unit during
-        //combat / on player’s turn.
-        // You can override the Trap :: toString() method so it returns different characters depending
+        return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%14s", "Attack: ") + attack + String.format("%14s", "Defense: ")
+                + defense + String.format("%21s", "Experience Value: ") + experienceValue;
+        //returns full information of the current unit.
+        //Use it to print the information of each unit during combat / on player’s turn.
+        //You can override the Trap :: toString() method so it returns different characters depending
         //on its visibility state.
-        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void visit(Unit unit) {
+
+    }
+
+    @Override
+    public void visit(Wall wall) {
+
+    }
+
+    @Override
+    public void visit(EmptyTile emptyTile) {
+
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+
     }
 }
