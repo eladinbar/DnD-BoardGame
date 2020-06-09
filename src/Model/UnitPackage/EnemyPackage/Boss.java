@@ -9,6 +9,19 @@ public class Boss extends Monster implements HeroicUnit {
     protected Integer abilityFrequency;
     protected Integer combatTicks;
 
+    public Boss(Bosses boss) {
+        this.name = boss.name;
+        this.symbol = boss.symbol;
+        this.healthPool = boss.healthPool;
+        this.currentHealth = healthPool;
+        this.attack = boss.attack;
+        this.defense = boss.defense;
+        this.visionRange = boss.visionRange;
+        this.experienceValue = boss.experienceValue;
+        this.abilityFrequency = boss.abilityFrequency;
+        this.combatTicks = 0;
+    }
+
     @Override
     public void onEnemyTurn() {
 //        ∗ The boss will attempt to traverse around the board.

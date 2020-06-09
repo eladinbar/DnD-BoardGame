@@ -1,4 +1,4 @@
-package Model.UnitPackage.PlayerPackage;
+package Model.UnitPackage.EnemyPackage;
 
 import Model.UnitPackage.EnemyPackage.Monster;
 
