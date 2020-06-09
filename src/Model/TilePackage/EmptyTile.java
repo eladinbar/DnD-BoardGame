@@ -1,11 +1,11 @@
 package Model.TilePackage;
 
-import java.awt.*;
+import java.awt.Point;
 
 public class EmptyTile extends Tile {
-    public EmptyTile(Point position, char symbol) {
+    public EmptyTile(Point position) {
         super(position);
-        symbol = '#';
+        symbol = '.';
     }
 
     @Override
