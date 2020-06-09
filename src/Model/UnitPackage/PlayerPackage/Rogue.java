@@ -1,6 +1,11 @@
 package Model.UnitPackage.PlayerPackage;
 
-import java.awt.*;
+import Model.TilePackage.EmptyTile;
+import Model.TilePackage.Visitor;
+import Model.TilePackage.Wall;
+import Model.UnitPackage.Unit;
+
+import java.awt.Point;
 
 public class Rogue extends Player {
     private Integer energyCost;
@@ -48,5 +53,25 @@ public class Rogue extends Player {
                 String.format("%15s", "Energy: ") + currentEnergy+"/"+energyCost;
         //returns full information on the current unit.
         //Use it to print the information of each unit during combat / on player turn.
+    }
+
+    @Override
+    public void visit(Unit unit) {
+
+    }
+
+    @Override
+    public void visit(Wall wall) {
+
+    }
+
+    @Override
+    public void visit(EmptyTile emptyTile) {
+
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+
     }
 }

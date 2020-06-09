@@ -2,7 +2,7 @@ package Model.TilePackage;
 
 import java.awt.Point;
 
-public abstract class Tile {
+public abstract class Tile implements Visited {
     public Point position;
     protected char symbol;
 

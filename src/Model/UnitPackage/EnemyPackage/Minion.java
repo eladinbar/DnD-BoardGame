@@ -1,8 +1,11 @@
 package Model.UnitPackage.EnemyPackage;
 
-import Model.UnitPackage.EnemyPackage.Monster;
+import Model.TilePackage.EmptyTile;
+import Model.TilePackage.Visitor;
+import Model.TilePackage.Wall;
+import Model.UnitPackage.Unit;
 
-import java.awt.*;
+import java.awt.Point;
 
 public class Minion extends Monster {
 
@@ -24,5 +27,25 @@ public class Minion extends Monster {
                 + defense + String.format("%21s", "Experience Value: ") + experienceValue + String.format("%17s", "Vision Range: ") + visionRange;
         //returns full information of the current unit.
         //Use it to print the information of each unit during combat / on player’s turn.
+    }
+
+    @Override
+    public void visit(Unit unit) {
+
+    }
+
+    @Override
+    public void visit(Wall wall) {
+
+    }
+
+    @Override
+    public void visit(EmptyTile emptyTile) {
+
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+
     }
 }

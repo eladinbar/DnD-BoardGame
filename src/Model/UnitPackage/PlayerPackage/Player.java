@@ -3,7 +3,7 @@ package Model.UnitPackage.PlayerPackage;
 import Model.UnitPackage.HeroicUnit;
 import Model.UnitPackage.Unit;
 
-import java.awt.*;
+import java.awt.Point;
 
 public abstract class Player extends Unit implements HeroicUnit {
     protected Integer experience;

@@ -1,10 +1,11 @@
 package Model.UnitPackage;
 
 import Model.TilePackage.Tile;
+import Model.TilePackage.Visitor;
 
-import java.awt.*;
+import java.awt.Point;
 
-public abstract class Unit extends Tile {
+public abstract class Unit extends Tile implements Visitor {
     protected String name;
     protected Integer healthPool;
     protected Integer currentHealth;

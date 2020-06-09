@@ -7,4 +7,9 @@ public class EmptyTile extends Tile {
         super(position);
         symbol = '#';
     }
+
+    @Override
+    public void accept(Visitor visitor) {
+
+    }
 }

@@ -1,5 +1,10 @@
 package Model.UnitPackage.EnemyPackage;
 
+import Model.TilePackage.EmptyTile;
+import Model.TilePackage.Visitor;
+import Model.TilePackage.Wall;
+import Model.UnitPackage.Unit;
+
 import java.awt.*;
 
 public class Trap extends Enemy {
@@ -46,5 +51,25 @@ public class Trap extends Enemy {
         //Use it to print the information of each unit during combat / on player’s turn.
         //You can override the Trap :: toString() method so it returns different characters depending
         //on its visibility state.
+    }
+
+    @Override
+    public void visit(Unit unit) {
+
+    }
+
+    @Override
+    public void visit(Wall wall) {
+
+    }
+
+    @Override
+    public void visit(EmptyTile emptyTile) {
+
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+
     }
 }

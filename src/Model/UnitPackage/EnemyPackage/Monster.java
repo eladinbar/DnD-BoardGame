@@ -1,6 +1,6 @@
 package Model.UnitPackage.EnemyPackage;
 
-import java.awt.*;
+import java.awt.Point;
 
 public abstract class Monster extends Enemy {
     protected Integer visionRange;
