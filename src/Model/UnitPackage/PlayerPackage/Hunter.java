@@ -1,4 +1,4 @@
-package Model;
+package Model.UnitPackage.PlayerPackage;
 
 public class Hunter extends Player {
     //Special ability: Shoot, hits the closest enemy for an amount equals to the hunter’s attack points at
@@ -7,9 +7,16 @@ public class Hunter extends Player {
     private Integer arrowsCount;
     private Integer ticksCount;
 
-    public Hunter() {
-        //insert initializers here
-        //Using arrows as resource. Starting amount of arrows in quiver is equals to (10 × level).
+    public Hunter(Hunters hunter) {
+        this.name = hunter.name;
+        this.healthPool = hunter.healthPool;
+        this.currentHealth = healthPool;
+        this.attack = hunter.attack;
+        this.defense = hunter.defense;
+        this.range = hunter.range;
+        this.arrowsCount = 10;
+        this.ticksCount = 0;
+        //Using arrows as resource. Starting amount of arrows in quiver is equal to (10 × level).
     }
 
     @Override

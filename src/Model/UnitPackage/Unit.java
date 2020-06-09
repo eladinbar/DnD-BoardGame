@@ -1,4 +1,6 @@
-package Model;
+package Model.UnitPackage;
+
+import Model.TilePackage.Tile;
 
 public abstract class Unit extends Tile {
     protected String name;

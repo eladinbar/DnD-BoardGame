@@ -1,6 +1,10 @@
-package Model;
+package Model.UnitPackage.EnemyPackage;
 
-public class Minion extends Monster {
+import Model.UnitPackage.Unit;
+
+public abstract class Enemy extends Unit {
+    protected Integer experienceValue;
+
     @Override
     public String describe() {
         //returns full information of the current unit (don’t forget to

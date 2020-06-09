@@ -1,4 +1,4 @@
-package Model;
+package Model.UnitPackage.PlayerPackage;
 
 public class Mage extends Player {
     //Special ability: Blizzard, randomly hit enemies within range for an amount equals to the mage’s
@@ -10,8 +10,19 @@ public class Mage extends Player {
     private Integer hitsCount;
     private Integer abilityRange;
 
-    public Mage() {
-        //insert initializers
+    public Mage(Mages mage) {
+        super();
+        this.name = mage.name;
+        this.healthPool = mage.healthPool;
+        this.currentHealth = healthPool;
+        this.attack = mage.attack;
+        this.defense = mage.defense;
+        this.manaPool = mage.manaPool;
+        this.currentMana = manaPool;
+        this.manaCost = mage.manaCost;
+        this.spellPower = mage.spellPower;
+        this.hitsCount = mage.hitsCount;
+        this.abilityRange = mage.abilityRange;
     }
 
     @Override

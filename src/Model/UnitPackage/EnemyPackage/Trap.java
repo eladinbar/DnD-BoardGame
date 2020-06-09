@@ -1,10 +1,23 @@
-package Model;
+package Model.UnitPackage.EnemyPackage;
 
 public class Trap extends Enemy {
     private Integer visibilityTime;
     private Integer invisibilityTime;
     private Integer tickCount;
     private Boolean visible;
+
+    public Trap(Traps trap) {
+        this.name = trap.name;
+        this.symbol = trap.symbol;
+        this.healthPool = trap.healthPool;
+        this.attack = trap.attack;
+        this.defense = trap.defense;
+        this.experienceValue = trap.experienceValue;
+        this.visibilityTime = trap.visibilityTime;
+        this.invisibilityTime = trap.invisibilityTime;
+        this.tickCount = 0;
+        this.visible = true;
+    }
 
     public void onEnemyTurn() {
 //        – A trap can’t move (unlike monsters), but updates its state (visibility) on each turn.

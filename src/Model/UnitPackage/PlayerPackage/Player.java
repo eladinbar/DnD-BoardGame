@@ -1,4 +1,7 @@
-package Model;
+package Model.UnitPackage.PlayerPackage;
+
+import Model.UnitPackage.HeroicUnit;
+import Model.UnitPackage.Unit;
 
 public abstract class Player extends Unit implements HeroicUnit {
     protected Integer experience;
@@ -6,6 +9,7 @@ public abstract class Player extends Unit implements HeroicUnit {
     protected Integer experienceThreshold;
 
     public Player() {
+        this.symbol = '@';
         this.experience = 0;
         this.level = 1;
         this.experienceThreshold = 50 * level;
