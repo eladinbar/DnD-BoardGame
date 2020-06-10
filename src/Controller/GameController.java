@@ -90,6 +90,7 @@ public class GameController implements TickManager, DeathObserver{
         playerTurn(chosenAction);
         enemiesTurn();
         notifyListeners();
+        gameStatusPrint();
         levelTickCounter++;
     }
 
