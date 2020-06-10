@@ -1,16 +1,13 @@
 package Model.UnitPackage.EnemyPackage;
 
-import Model.TilePackage.EmptyTile;
-import Model.TilePackage.Visitor;
-import Model.TilePackage.Wall;
 import Model.UnitPackage.HeroicUnit;
-import Model.UnitPackage.Unit;
+import Model.UnitPackage.PlayerPackage.Player;
 
 import java.awt.Point;
 
 //– The Mountain
 //– Queen Cersei
-//– Night’s King
+//– Night King
 public class Boss extends Monster implements HeroicUnit {
     protected Integer abilityFrequency;
     protected Integer combatTicks;
@@ -30,7 +27,7 @@ public class Boss extends Monster implements HeroicUnit {
     }
 
     @Override
-    public void onEnemyTurn() {
+    public void onEnemyTurn(Player player) {
 //        ∗ The boss will attempt to traverse around the board.
 //        ∗ Boss can move 1 step in the following directions: Up/Down/Left/Right, and may chase the
 //        player if the player is within its vision range.
@@ -72,25 +69,5 @@ public class Boss extends Monster implements HeroicUnit {
                 + defense + String.format("%20s", "Experience Value: ") + experienceValue + String.format("%17s", "Vision Range: ") + visionRange;
         //returns full information of the current unit.
         //Use it to print the information of each unit during combat / on player’s turn.
-    }
-
-    @Override
-    public void visit(Unit unit) {
-
-    }
-
-    @Override
-    public void visit(Wall wall) {
-
-    }
-
-    @Override
-    public void visit(EmptyTile emptyTile) {
-
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
-
     }
 }

@@ -1,17 +1,17 @@
 package Model.TilePackage;
 
-import Model.UnitPackage.Unit;
+import Model.UnitPackage.Visitor;
 
 import java.awt.Point;
 
 public class Wall extends Tile {
     public Wall(Point position) {
         super(position);
-        symbol = '.';
+        symbol = '#';
     }
 
     @Override
     public void accept(Visitor visitor) {
-
+        //Do nothing
     }
 }

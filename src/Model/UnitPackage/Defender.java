@@ -1,5 +1,7 @@
 package Model.UnitPackage;
 
+import Model.Result;
+
 public interface Defender {
-    void defend(Unit unit);
+    Result defend();
 }
