@@ -2,6 +2,7 @@ package Model.UnitPackage.EnemyPackage;
 
 import Model.Result;
 import Model.TilePackage.Tile;
+import Model.TickListener;
 import Model.UnitPackage.PlayerPackage.Player;
 import Model.UnitPackage.Unit;
 import Model.UnitPackage.Visitor;
@@ -62,5 +63,10 @@ public abstract class Enemy extends Unit {
 
     public Integer getExperienceValue() {
         return experienceValue;
+    }
+
+    @Override
+    public void onGameTick() {
+
     }
 }

@@ -18,4 +18,8 @@ public enum Hunters {
         this.range = range;
         this.menuPosition = menuPosition;
     }
+
+    public int getMenuPosition() {
+        return menuPosition;
+    }
 }

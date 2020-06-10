@@ -1,6 +1,7 @@
 package Model.UnitPackage.PlayerPackage;
 
 import Model.Result;
+import Model.TickListener;
 import Model.TilePackage.EmptyTile;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.Visitor;
@@ -11,7 +12,7 @@ import Model.UnitPackage.Unit;
 
 import java.awt.Point;
 
-public abstract class Player extends Unit implements HeroicUnit, Visitor {
+public abstract class Player extends Unit implements HeroicUnit, Visitor, TickListener {
     protected Integer experience;
     protected Integer level;
     protected Integer experienceThreshold;

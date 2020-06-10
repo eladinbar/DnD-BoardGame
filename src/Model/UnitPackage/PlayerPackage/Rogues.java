@@ -19,4 +19,8 @@ public enum Rogues {
         this.energyCost = energyCost;
         this.menuPosition = menuPosition;
     }
+
+    public int getMenuPosition() {
+        return menuPosition;
+    }
 }
