@@ -5,7 +5,7 @@ import Model.TilePackage.Tile;
 
 import java.awt.Point;
 
-public abstract class Unit extends Tile implements Attacker, Combatant, Defender {
+public abstract class Unit extends Tile implements Attacker, Combatant, Defender, TickListener {
     protected String name;
     protected Integer healthPool;
     protected Integer currentHealth;

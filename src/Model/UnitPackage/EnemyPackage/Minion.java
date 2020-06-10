@@ -1,5 +1,6 @@
 package Model.UnitPackage.EnemyPackage;
 
+import Model.TilePackage.Tile;
 import Model.UnitPackage.PlayerPackage.Player;
 
 import java.awt.Point;
@@ -19,7 +20,12 @@ public class Minion extends Monster {
     }
 
     @Override
-    public void onEnemyTurn(Player player) {
+    public void onGameTick() {
+
+    }
+
+    @Override
+    public void onEnemyTurn(Tile[][] layout, Player player) {
 //        The monster will attempt to traverse around the board.
 //        – Monsters can move 1 step in the following directions: Up/Down/Left/Right, and may chase
 //        the player if the player is within its vision range.

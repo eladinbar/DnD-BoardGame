@@ -1,5 +1,6 @@
 package Model.UnitPackage.EnemyPackage;
 
+import Model.TilePackage.Tile;
 import Model.UnitPackage.HeroicUnit;
 import Model.UnitPackage.PlayerPackage.Player;
 
@@ -27,7 +28,7 @@ public class Boss extends Monster implements HeroicUnit {
     }
 
     @Override
-    public void onEnemyTurn(Player player) {
+    public void onEnemyTurn(Tile[][] layout, Player player) {
 //        ∗ The boss will attempt to traverse around the board.
 //        ∗ Boss can move 1 step in the following directions: Up/Down/Left/Right, and may chase the
 //        player if the player is within its vision range.
@@ -56,6 +57,11 @@ public class Boss extends Monster implements HeroicUnit {
 //        else
 //          combatTicks = 0
 //        Perform a random movement action: left, right, up, down or stay in the same place.
+    }
+
+    @Override
+    public void onGameTick() {
+
     }
 
     @Override

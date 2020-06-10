@@ -1,5 +1,6 @@
 package Model.UnitPackage.EnemyPackage;
 
+import Model.TilePackage.Tile;
 import Model.UnitPackage.PlayerPackage.Player;
 
 import java.awt.*;
@@ -26,19 +27,24 @@ public class Trap extends Enemy {
     }
 
     @Override
-    public void onEnemyTurn(Player player) {
+    public void onEnemyTurn(Tile[][] layout, Player player) {
 //        – A trap can’t move (unlike monsters), but updates its state (visibility) on each turn.
 //        – After visibility time game ticks, the trap will turn invisible.
 //        – The trap becomes visible invisibility time game ticks afterwards.
 //        – The trap may attack the player if the range (trap, player) < 2.
 //        – The trap’s state will be updated on each turn as follows:
-        visible = ticksCount < visibilityTime;
-        if (ticksCount == (visibilityTime + invisibilityTime))
-          ticksCount = 0;
-        else
-          ticksCount++;
+        onGameTick();
         if (this.range(player) < 2)
           this.engage(player);
+    }
+
+    @Override
+    public void onGameTick() {
+        visible = ticksCount < visibilityTime;
+        if (ticksCount == (visibilityTime + invisibilityTime))
+            ticksCount = 0;
+        else
+            ticksCount++;
     }
 
     @Override

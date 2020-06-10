@@ -20,23 +20,24 @@ public abstract class Monster extends Enemy implements Visitor {
     }
 
     @Override
-    public void visit(Enemy enemy) {
-        //Do nothing
+    public String visit(Enemy enemy) {
+        return ""; //Do nothing
     }
 
     @Override
-    public void visit(Player player) {
-        this.engage(player);
+    public String visit(Player player) {
+        return this.engage(player);
     }
 
     @Override
-    public void visit(Wall wall) {
-        //Do nothing
+    public String visit(Wall wall) {
+        return ""; //Do nothing
     }
 
     @Override
-    public void visit(EmptyTile emptyTile) {
+    public String visit(EmptyTile emptyTile) {
         this.setPosition(emptyTile.getPosition());
+        return "";
     }
 
     protected void moveLeft() {

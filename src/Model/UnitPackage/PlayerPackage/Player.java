@@ -51,23 +51,24 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor {
     }
 
     @Override
-    public void visit(Enemy enemy) {
-        this.engage(enemy);
+    public String visit(Enemy enemy) {
+        return this.engage(enemy);
     }
 
     @Override
-    public void visit(Player player) {
-        //Do nothing
+    public String visit(Player player) {
+        return ""; //Do nothing
     }
 
     @Override
-    public void visit(Wall wall) {
-        //Do nothing
+    public String visit(Wall wall) {
+        return ""; //Do nothing
     }
 
     @Override
-    public void visit(EmptyTile emptyTile) {
+    public String visit(EmptyTile emptyTile) {
         this.setPosition(emptyTile.getPosition());
+        return "";
     }
 
     @Override

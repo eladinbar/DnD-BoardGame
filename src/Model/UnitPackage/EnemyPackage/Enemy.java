@@ -1,6 +1,7 @@
 package Model.UnitPackage.EnemyPackage;
 
 import Model.Result;
+import Model.TilePackage.Tile;
 import Model.UnitPackage.PlayerPackage.Player;
 import Model.UnitPackage.Unit;
 import Model.UnitPackage.Visitor;
@@ -22,7 +23,7 @@ public abstract class Enemy extends Unit {
         throw new UnsupportedOperationException();
     }
 
-    public abstract void onEnemyTurn(Player player);
+    public abstract void onEnemyTurn(Tile[][] layout, Player player);
 
     @Override
     public void accept(Visitor visitor) {
