@@ -12,15 +12,15 @@ public class PlayerSelectionMenu implements GameInfo {
     private List<String> magesList;
     private List<String> huntersList;
 
-    public PlayerSelectionMenu(){
+    public PlayerSelectionMenu() {
         warriorsList = Arrays.stream(Warriors.values()).
-                map((character) -> character.getMenuPosition() + ". "  + new Warrior(character).describe()).collect(Collectors.toList());
+                map((character) -> character.getMenuPosition() + ". " + new Warrior(null, character).describe()).collect(Collectors.toList());
         roguesList = Arrays.stream(Rogues.values()).
-                map((character) ->  character.getMenuPosition() + ". "  + new Rogue(character).describe()).collect(Collectors.toList());
+                map((character) -> character.getMenuPosition() + ". " + new Rogue(null, character).describe()).collect(Collectors.toList());
         magesList = Arrays.stream(Mages.values()).
-                map((character) ->  character.getMenuPosition() + ". " + new Mage(character).describe()).collect(Collectors.toList());
+                map((character) -> character.getMenuPosition() + ". " + new Mage(null, character).describe()).collect(Collectors.toList());
         huntersList = Arrays.stream(Hunters.values()).
-                map((character) ->  character.getMenuPosition() + ". "  + new Hunter(character).describe()).collect(Collectors.toList());
+                map((character) -> character.getMenuPosition() + ". " + new Hunter(null, character).describe()).collect(Collectors.toList());
     }
 
     @Override
@@ -32,9 +32,6 @@ public class PlayerSelectionMenu implements GameInfo {
         roguesList.stream().forEach((x) -> System.out.println(x));
         huntersList.stream().forEach((x) -> System.out.println(x));
     }
-
-
-
 
 
 }

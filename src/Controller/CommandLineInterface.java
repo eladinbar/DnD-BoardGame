@@ -51,7 +51,7 @@ public class CommandLineInterface {
     }
 
     public void startGame(){
-        controller = new GameController()
+//        controller = new GameController()
     }
 
     public void selectPlayer(char c){

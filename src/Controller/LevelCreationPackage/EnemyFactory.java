@@ -10,33 +10,33 @@ public class EnemyFactory implements AbstractTileFactory {
 
     @Override
     public Tile getTile(char c, Point position) {
-        switch (c){
+        switch (c) {
             case 's':
-                return new Minion(Minions.LANNISTER_SOLDIER, position);
+                return new Minion(position, Minions.LANNISTER_SOLDIER);
             case 'k':
-                return new Minion(Minions.LANNISTER_KNIGHT,position);
+                return new Minion(position, Minions.LANNISTER_KNIGHT);
             case 'q':
-                return new Minion(Minions.QUEENS_GUARD,position);
+                return new Minion(position, Minions.QUEENS_GUARD);
             case 'z':
-                return new Minion(Minions.WIRGHT, position);
+                return new Minion(position, Minions.WIRGHT);
             case 'b':
-                return new Minion(Minions.BEAR_WRIGHT, position);
+                return new Minion(position, Minions.BEAR_WRIGHT);
             case 'g':
-                return new Minion(Minions.GIANT_WRIGHT, position);
+                return new Minion(position, Minions.GIANT_WRIGHT);
             case 'w':
-                return new Minion(Minions.WHITE_WALKER, position);
+                return new Minion(position, Minions.WHITE_WALKER);
             case 'M':
-                return new Boss(Bosses.THE_MOUNTAIN, position);
+                return new Boss(position, Bosses.THE_MOUNTAIN);
             case 'C':
-                return new Boss(Bosses.QUEEN_CERSEI, position);
+                return new Boss(position, Bosses.QUEEN_CERSEI);
             case 'K':
-                return new Boss(Bosses.NIGHT_KING, position);
-            case'B':
-                return new Trap(Traps.BONUS_TRAP, position);
-            case'Q':
-                return new Trap(Traps.QUEENS_TRAP, position);
-            case'D':
-                return new Trap(Traps.DEATH_TRAP, position);
+                return new Boss(position, Bosses.NIGHT_KING);
+            case 'B':
+                return new Trap(position, Traps.BONUS_TRAP);
+            case 'Q':
+                return new Trap(position, Traps.QUEENS_TRAP);
+            case 'D':
+                return new Trap(position, Traps.DEATH_TRAP);
             default:
                 return new EmptyTile(position);
         }

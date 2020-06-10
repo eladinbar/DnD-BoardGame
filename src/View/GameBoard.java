@@ -1,6 +1,7 @@
 package View;
 
 import Model.TilePackage.*;
+import Model.UnitPackage.PlayerPackage.Player;
 
 public class GameBoard implements GameInfo {
 
@@ -30,5 +31,9 @@ public class GameBoard implements GameInfo {
             }
             System.out.println();
         }
+    }
+
+    public void insertPlayer(Tile p, int x, int y){
+
     }
 }
