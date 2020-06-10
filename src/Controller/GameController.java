@@ -14,7 +14,7 @@ public class GameController implements TickManager, DeathObserver{
     private Player currentPlayer;
     private LevelCreator levelCreator;
 
-    private int levelTickCounter = 0;
+    private int levelTickCounter;
     private List<TickListener> listeners;
 
     public GameController(Player chosenPlayer){
@@ -57,8 +57,9 @@ public class GameController implements TickManager, DeathObserver{
         currentDungeonLevel = levelCreator.decipherLevel(levelPath, currentPlayer);
         listeners.add(currentPlayer);
         for (Enemy e : currentDungeonLevel.getEnemyList()) {
-            listeners.add(e);
+            addListener(e);
         }
+        resetTickCounter();
         gameStatusPrint();
     }
 
@@ -72,7 +73,29 @@ public class GameController implements TickManager, DeathObserver{
     }
 
     public boolean playerAlive(){
-        return currentPlayer.
+        return true;
     }
+
+    private void playerTurn(ActionListInput chosenAction){
+        currentPlayer.onPlayerTurn(currentDungeonLevel.getBoard().getLayout(), chosenAction);
+    }
+
+    private void enemiesTurn(){
+        for (Enemy e : currentDungeonLevel.getEnemyList()) {
+            e.onEnemyTurn(currentDungeonLevel.getBoard().getLayout(), currentPlayer);
+        }
+    }
+
+    public void round(ActionListInput chosenAction){
+        playerTurn(chosenAction);
+        enemiesTurn();
+        notifyListeners();
+        levelTickCounter++;
+    }
+
+    private void resetTickCounter(){
+        levelTickCounter = 0;
+    }
+
 
 }

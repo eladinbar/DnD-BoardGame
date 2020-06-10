@@ -20,4 +20,8 @@ public class GameBoard implements GameInfo {
             System.out.println();
         }
     }
+
+    public Tile[][] getLayout() {
+        return layout;
+    }
 }
