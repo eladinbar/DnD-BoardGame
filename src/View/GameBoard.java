@@ -34,6 +34,6 @@ public class GameBoard implements GameInfo {
     }
 
     public void insertPlayer(Tile p, int x, int y){
-
+        layout[x][y] = p;
     }
 }
