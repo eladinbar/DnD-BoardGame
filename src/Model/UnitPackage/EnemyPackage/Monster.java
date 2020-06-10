@@ -40,19 +40,19 @@ public abstract class Monster extends Enemy implements Visitor {
         return "";
     }
 
-    protected void moveLeft() {
-        this.position.x -= 1;
+    protected void moveLeft(Tile[][] layout) {
+        this.interact(layout[this.position.x-1][this.position.y]);
     }
 
-    protected void moveRight() {
-        this.position.x += 1;
+    protected void moveRight(Tile[][] layout) {
+        this.interact(layout[this.position.x+1][this.position.y]);
     }
 
-    protected void moveUp() {
-        this.position.y += 1;
+    protected void moveUp(Tile[][] layout) {
+        this.interact(layout[this.position.x][this.position.y+1]);
     }
 
-    protected void moveDown() {
-        this.position.y -= 1;
+    protected void moveDown(Tile[][] layout) {
+        this.interact(layout[this.position.x][this.position.y-1]);
     }
 }

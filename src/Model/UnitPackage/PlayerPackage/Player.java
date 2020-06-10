@@ -1,5 +1,6 @@
 package Model.UnitPackage.PlayerPackage;
 
+import Controller.ActionListInput;
 import Model.Result;
 import Model.TickListener;
 import Model.TilePackage.EmptyTile;
@@ -40,6 +41,10 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         currentHealth = healthPool;
         attack += 4 * level;
         defense += level;
+    }
+
+    public void onPlayerTurn(Tile[][] layout, ActionListInput action) {
+
     }
 
     public void interact(Tile tile) {

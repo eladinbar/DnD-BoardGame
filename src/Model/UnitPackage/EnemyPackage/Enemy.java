@@ -17,13 +17,6 @@ public abstract class Enemy extends Unit {
         super(position);
     }
 
-    @Override
-    public String describe() {
-        //returns full information of the current unit.
-        //Use it to print the information of each unit during combat / on player’s turn.
-        throw new UnsupportedOperationException();
-    }
-
     public abstract void onEnemyTurn(Tile[][] layout, Player player);
 
     @Override

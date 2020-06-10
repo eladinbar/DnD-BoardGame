@@ -36,36 +36,36 @@ public class Minion extends Monster {
             dy = this.position.y - player.getPosition().y;
             if (Math.abs(dx) > Math.abs(dy)) {
                 if (dx > 0)
-                     this.moveLeft();
+                     this.moveLeft(layout);
                 else
-                     this.moveRight();
+                     this.moveRight(layout);
             }
             else
                 if (dy > 0)
-                    this.moveDown();
+                    this.moveDown(layout);
                 else
-                    this.moveUp();
+                    this.moveUp(layout);
         }
         else
-            this.randomMovement();
+            this.randomMovement(layout);
     }
 
-    private void randomMovement() {
+    private void randomMovement(Tile[][] layout) {
         int rand = (int)Math.random()*5;
         switch(rand) {
             case 0:
-                break;
+                break; //Do nothing
             case 1:
-                this.moveLeft();
+                this.moveLeft(layout);
                 break;
             case 2:
-                this.moveRight();
+                this.moveRight(layout);
                 break;
             case 3:
-                this.moveUp();
+                this.moveUp(layout);
                 break;
             case 4:
-                this.moveDown();
+                this.moveDown(layout);
                 break;
         }
     }
