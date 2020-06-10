@@ -1,13 +1,14 @@
 package Model.UnitPackage.EnemyPackage;
 
 import Model.Result;
+import Model.TickListener;
 import Model.UnitPackage.PlayerPackage.Player;
 import Model.UnitPackage.Unit;
 import Model.UnitPackage.Visitor;
 
 import java.awt.Point;
 
-public abstract class Enemy extends Unit {
+public abstract class Enemy extends Unit implements TickListener {
     protected Integer experienceValue;
     public final String ANSI_RED = "\u001B[31m";
 
@@ -61,5 +62,10 @@ public abstract class Enemy extends Unit {
 
     public Integer getExperienceValue() {
         return experienceValue;
+    }
+
+    @Override
+    public void onGameTick() {
+
     }
 }

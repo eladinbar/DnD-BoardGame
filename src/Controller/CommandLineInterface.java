@@ -1,61 +1,87 @@
 package Controller;
 
 import Controller.LevelCreationPackage.LevelCreator;
-import Model.UnitPackage.PlayerPackage.Player;
+import Model.UnitPackage.PlayerPackage.*;
 import View.GameBoard;
 import View.PlayerSelectionMenu;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class CommandLineInterface {
 
     private GameController controller;
     private PlayerSelectionMenu selectionMenu;
-    private List<Level> levels;
+    private List<String> levelsPath;
     private LevelCreator levelCreator;
     private Player chosenPlayer;
 
-    public CommandLineInterface(){
+    public CommandLineInterface(List<String> levelsPath) {
         controller = null;
         selectionMenu = new PlayerSelectionMenu();
-        levels = new ArrayList<>();
+        this.levelsPath =  levelsPath;
         levelCreator = new LevelCreator();
+        chosenPlayer = null;
     }
 
-    public void decipherLevels(String... rawLevelsPath){
 
-        for (int i = 0; i < rawLevelsPath.length; i++) {
-            List<String> levelLines = readAllLines(rawLevelsPath[i]);
-            int boardLength = levelLines.get(0).length();
-            int boardWidth = levelLines.size();
-            GameBoard constructedGameBoard = new GameBoard((levelCreator.createLevel(levelLines,boardLength,boardWidth)),boardLength,boardWidth);
-            Level newLevel = new Level(constructedGameBoard,levelCreator.getPlayerPosition());
-            levels.add(newLevel);
+    public void start() {
+        selectionMenu.printInfo();
+        selectPlayer(receiveInput());
+        while(chosenPlayer==null){
+            System.out.println("Invalid Selection. Please select again");
+            selectPlayer(receiveInput());
         }
+        controller = new GameController(chosenPlayer);
+        controller.loadLevel(getNextLevelPath());
+        round();
     }
 
-    private List<String> readAllLines(String path) {
-        List<String> lines = Collections.emptyList();
-        try {
-            lines = Files.readAllLines(Paths.get(path));
-        } catch(IOException ex){
-            System.out.println("something went wrong with reading the file. Please restart the program\n" + ex.getMessage() + "\n" + ex.getStackTrace());
+    public void round() {
+
+    }
+
+    public Character receiveInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.next().charAt(0);
+    }
+
+    public String getNextLevelPath(){
+        String path = levelsPath.get(0);
+        levelsPath.remove(0);
+        return path;
+    }
+
+    public void selectPlayer(Character c) {
+        for (Warriors w : Warriors.values()) {
+            if (w.getMenuPosition() == (c.charValue() - 48)) {
+                chosenPlayer = new Warrior(null, w);
+                return;
+            }
         }
-        return lines;
-    }
 
-    public void startGame(){
-//        controller = new GameController()
-    }
+        for (Mages m : Mages.values()) {
+            if (m.getMenuPosition() == (c.charValue() - 48)) {
+                chosenPlayer = new Mage(null, m);
+                return;
+            }
+        }
 
-    public void selectPlayer(char c){
+        for (Rogues r : Rogues.values()) {
+            if(r.getMenuPosition() == (c.charValue() - 48)) {
+                chosenPlayer = new Rogue(null, r);
+                return;
+            }
+        }
 
+        for (Hunters h : Hunters.values()) {
+            if(h.getMenuPosition()== (c.charValue() - 48)) {
+                chosenPlayer = new Hunter(null, h);
+                return;
+            }
+        }
     }
 
 }
