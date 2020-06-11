@@ -11,7 +11,7 @@ public class Wall extends Tile {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        //Do nothing
+    public String accept(Visitor visitor) {
+        return ""; //Do nothing
     }
 }

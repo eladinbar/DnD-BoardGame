@@ -43,7 +43,7 @@ public class Mage extends Player {
     }
 
     public void onGameTick() {
-        currentMana = Math.min(manaPool, currentMana + level);
+        this.setCurrentMana(currentMana + level);;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Mage extends Player {
             List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, abilityRange);
             String combatResult = ANSIColors.CYAN + name + " cast Blizzard." + ANSIColors.RESET;
             while (hits < hitsCount & !enemiesInRange.isEmpty()) {
-                //Select random enemy within range
+                //Select a random enemy within range
                 Enemy enemy = chooseRandomEnemy(enemiesInRange, abilityRange);
                 //Deal damage to the chosen enemy for an amount equal to spell power
                 //(each enemy may try to defend itself).
@@ -83,6 +83,9 @@ public class Mage extends Player {
                 + defense + String.format("%14s", "Level: ") + level + String.format("%17s", "Experience: ") + experience+"/"+experienceThreshold +
                 String.format("%13s", "Mana: ") + currentMana+"/"+manaPool+" " + String.format("%16s", "Spell Power: ") + spellPower;
         //returns full information on the current unit.
-        //Use it to print the information of each unit during combat / on player turn.
+    }
+
+    public void setCurrentMana(Integer currentMana) {
+        this.currentMana = Math.min(currentMana, manaPool);
     }
 }

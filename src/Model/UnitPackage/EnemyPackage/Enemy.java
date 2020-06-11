@@ -16,11 +16,11 @@ public abstract class Enemy extends Unit {
         super(position);
     }
 
-    public abstract void onEnemyTurn(Tile[][] layout, Player player);
+    public abstract String onEnemyTurn(Tile[][] layout, Player player);
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
+    public String accept(Visitor visitor) {
+        return visitor.visit(this);
     }
 
     @Override

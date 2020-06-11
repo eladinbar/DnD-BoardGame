@@ -49,22 +49,23 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         return ANSIColors.BRIGHT_YELLOW + name + " reached level " + level + ": ";
     }
 
-    public void onPlayerTurn(Tile[][] layout, ActionListInput action, List<Enemy> enemies) {
+    public String onPlayerTurn(Tile[][] layout, ActionListInput action, List<Enemy> enemies) {
         if (action == ActionListInput.Left)
-            this.moveLeft(layout);
-        if (action == ActionListInput.Right)
-            this.moveRight(layout);
-        if (action == ActionListInput.Up)
-            this.moveUp(layout);
-        if (action == ActionListInput.Down)
-            this.moveDown(layout);
-        if (action == ActionListInput.CastAbility) {
+            return this.moveLeft(layout);
+        else if (action == ActionListInput.Right)
+            return this.moveRight(layout);
+        else if (action == ActionListInput.Up)
+            return this.moveUp(layout);
+        else if (action == ActionListInput.Down)
+            return this.moveDown(layout);
+        else if (action == ActionListInput.CastAbility) {
             try {
-                this.castAbility(layout, enemies);
+                return this.castAbility(layout, enemies);
             } catch (Exception ex) {
 
             }
         }
+        return ""; //Do nothing
     }
 
     protected List<Enemy> getAllEnemiesInRange(List<Enemy> enemies, int range) {
@@ -98,29 +99,29 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         return closestEnemy;
     }
 
-    protected void moveLeft(Tile[][] layout) {
-        this.interact(layout[this.position.x-1][this.position.y]);
+    protected String moveLeft(Tile[][] layout) {
+        return this.interact(layout[this.position.x-1][this.position.y]);
     }
 
-    protected void moveRight(Tile[][] layout) {
-        this.interact(layout[this.position.x+1][this.position.y]);
+    protected String moveRight(Tile[][] layout) {
+        return this.interact(layout[this.position.x+1][this.position.y]);
     }
 
-    protected void moveUp(Tile[][] layout) {
-        this.interact(layout[this.position.x][this.position.y+1]);
+    protected String moveUp(Tile[][] layout) {
+        return this.interact(layout[this.position.x][this.position.y+1]);
     }
 
-    protected void moveDown(Tile[][] layout) {
-        this.interact(layout[this.position.x][this.position.y-1]);
+    protected String moveDown(Tile[][] layout) {
+        return this.interact(layout[this.position.x][this.position.y-1]);
     }
 
-    public void interact(Tile tile) {
-        tile.accept(this);
+    public String interact(Tile tile) {
+        return tile.accept(this);
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
+    public String accept(Visitor visitor) {
+        return visitor.visit(this);
     }
 
     @Override

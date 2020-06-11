@@ -7,7 +7,6 @@ import Model.UnitPackage.PlayerPackage.Player;
 import java.awt.Point;
 
 public class Minion extends Monster {
-    public final String ANSI_RED = "\u001B[31m";
 
     public Minion(Point position, Minions minion) {
         super(position);
@@ -27,7 +26,7 @@ public class Minion extends Monster {
     }
 
     @Override
-    public void onEnemyTurn(Tile[][] layout, Player player) {
+    public String onEnemyTurn(Tile[][] layout, Player player) {
 //        The monster will attempt to traverse around the board.
 //        – Monsters can move 1 step in the following directions: Up/Down/Left/Right, and may chase
 //        the player if the player is within its vision range.
@@ -38,18 +37,18 @@ public class Minion extends Monster {
             dy = this.position.y - player.getPosition().y;
             if (Math.abs(dx) > Math.abs(dy)) {
                 if (dx > 0)
-                     this.moveLeft(layout);
+                     return this.moveLeft(layout);
                 else
-                     this.moveRight(layout);
+                     return this.moveRight(layout);
             }
             else
                 if (dy > 0)
-                    this.moveDown(layout);
+                    return this.moveDown(layout);
                 else
-                    this.moveUp(layout);
+                    return this.moveUp(layout);
         }
         else
-            this.randomMovement(layout);
+            return this.randomMovement(layout);
     }
 
     @Override
@@ -57,7 +56,6 @@ public class Minion extends Monster {
         return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%14s", "Attack: ") + attack + String.format("%14s", "Defense: ")
                 + defense + String.format("%21s", "Experience Value: ") + experienceValue + String.format("%17s", "Vision Range: ") + visionRange;
         //returns full information of the current unit.
-        //Use it to print the information of each unit during combat / on player’s turn.
     }
 
     @Override

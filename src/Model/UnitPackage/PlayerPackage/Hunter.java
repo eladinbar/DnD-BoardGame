@@ -9,8 +9,6 @@ import java.awt.Point;
 import java.util.List;
 
 public class Hunter extends Player {
-    //Special ability: Shoot, hits the closest enemy for an amount equals to the hunter’s attack points at
-    //the cost of an arrow.
     private Integer range;
     private Integer arrowsCount;
     private Integer ticksCount;
@@ -48,6 +46,8 @@ public class Hunter extends Player {
 
     @Override
     public String castAbility(Tile[][] layout, List<Enemy> enemies) throws Exception {
+        //Special ability: Shoot, hits the closest enemy for an amount that equals to the hunter’s attack points at
+        //the cost of an arrow.
         if (arrowsCount == 0)
             throw new Exception(name + " tried to cast Shoot but does not have enough arrows. " + (10-ticksCount) + " more turns are left until an arrow is replenished.");
         else if (getAllEnemiesInRange(enemies, range).isEmpty())
@@ -57,7 +57,7 @@ public class Hunter extends Player {
             List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, range);
             Enemy closestEnemy = getClosestEnemyInRange(enemiesInRange, range);
             if (closestEnemy!=null) {
-                combatResult = ANSIColors.CYAN + name + " fired an arrow at " + closestEnemy + "." + ANSIColors.RESET;
+                combatResult = ANSIColors.CYAN + name + " fired an arrow at " + closestEnemy.getName() + "." + ANSIColors.RESET;
                 Result defenseResult = closestEnemy.defend();
                 int defenseRoll = defenseResult.getDiceRoll();
                 combatResult += "\n" + defenseResult.getOutput();
@@ -81,6 +81,5 @@ public class Hunter extends Player {
                 + defense + String.format("%14s", "Level: ") + level + String.format("%16s", "Experience: ") + experience+"/"+experienceThreshold +
                 String.format("%15s", "Arrows: ") + arrowsCount + String.format("%14s", "Range: ") + range;
         //returns full information on the current unit.
-        //Use it to print the information of each unit during combat / on player turn.
     }
 }

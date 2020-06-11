@@ -69,6 +69,5 @@ public class Rogue extends Player {
                 + defense + String.format("%14s", "Level: ") + level + String.format("%16s", "Experience: ") + experience+"/"+experienceThreshold +
                 String.format("%15s", "Energy: ") + currentEnergy+"/"+energyCost;
         //returns full information on the current unit.
-        //Use it to print the information of each unit during combat / on player turn.
     }
 }

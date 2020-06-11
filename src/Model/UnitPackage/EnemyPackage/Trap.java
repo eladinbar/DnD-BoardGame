@@ -28,7 +28,7 @@ public class Trap extends Enemy {
     }
 
     @Override
-    public void onEnemyTurn(Tile[][] layout, Player player) {
+    public String onEnemyTurn(Tile[][] layout, Player player) {
 //        – A trap can’t move (unlike monsters), but updates its state (visibility) on each turn.
 //        – After visibility time game ticks, the trap will turn invisible.
 //        – The trap becomes visible invisibility time game ticks afterwards.
@@ -36,7 +36,8 @@ public class Trap extends Enemy {
 //        – The trap’s state will be updated on each turn as follows:
         onGameTick();
         if (this.range(player) < 2)
-          this.engage(player);
+          return this.engage(player);
+        return "";
     }
 
     @Override

@@ -15,8 +15,8 @@ public abstract class Monster extends Enemy implements Visitor {
         super(position);
     }
 
-    public void interact(Tile tile) {
-        tile.accept(this);
+    public String interact(Tile tile) {
+        return tile.accept(this);
     }
 
     @Override
@@ -35,39 +35,35 @@ public abstract class Monster extends Enemy implements Visitor {
         return "";
     }
 
-    protected void moveLeft(Tile[][] layout) {
-        this.interact(layout[this.position.x-1][this.position.y]);
+    protected String moveLeft(Tile[][] layout) {
+        return this.interact(layout[this.position.x-1][this.position.y]);
     }
 
-    protected void moveRight(Tile[][] layout) {
-        this.interact(layout[this.position.x+1][this.position.y]);
+    protected String moveRight(Tile[][] layout) {
+        return this.interact(layout[this.position.x+1][this.position.y]);
     }
 
-    protected void moveUp(Tile[][] layout) {
-        this.interact(layout[this.position.x][this.position.y+1]);
+    protected String moveUp(Tile[][] layout) {
+        return this.interact(layout[this.position.x][this.position.y+1]);
     }
 
-    protected void moveDown(Tile[][] layout) {
-        this.interact(layout[this.position.x][this.position.y-1]);
+    protected String moveDown(Tile[][] layout) {
+        return this.interact(layout[this.position.x][this.position.y-1]);
     }
 
-    protected void randomMovement(Tile[][] layout) {
-        int rand = (int)Math.random()*5;
+    protected String randomMovement(Tile[][] layout) {
+        int rand = (int)Math.random()*4;
         switch(rand) {
             case 0:
-                break; //Do nothing
+                return this.moveLeft(layout);
             case 1:
-                this.moveLeft(layout);
-                break;
+                return this.moveRight(layout);
             case 2:
-                this.moveRight(layout);
-                break;
+                return this.moveUp(layout);
             case 3:
-                this.moveUp(layout);
-                break;
-            case 4:
-                this.moveDown(layout);
-                break;
+                return this.moveDown(layout);
+            default:
+                return ""; //Do nothing
         }
     }
 }
