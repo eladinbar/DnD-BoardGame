@@ -1,6 +1,7 @@
 package Model;
 
 public enum ANSIColors {
+    BOLD("\u001b[1m"),
     BLACK("\u001b[30m"),
     RED("\u001b[31m"),
     GREEN("\u001b[32m"),

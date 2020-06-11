@@ -11,7 +11,6 @@ public abstract class Unit extends Tile implements Attacker, Combatant, Defender
     protected Integer currentHealth;
     protected Integer attack;
     protected Integer defense;
-    public String ANSI_RESET = "\u001B[0m";
 
     public Unit(Point position) {
         super(position);

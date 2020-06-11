@@ -1,5 +1,6 @@
 package Model.UnitPackage.PlayerPackage;
 
+import Model.ANSIColors;
 import Model.Result;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.EnemyPackage.Enemy;
@@ -28,11 +29,12 @@ public class Hunter extends Player {
     }
 
     @Override
-    public void levelUp() {
-        super.levelUp();
+    public String levelUp() {
+        String output = super.levelUp();
         arrowsCount += 10 * level;
         attack += 2 * level;
         defense += level;
+        return output + "+" + 10*level + " Health, " + "+" + 6*level + "Attack, " + "+" + 2*level + "Defense, " + "+" + 10*level + " Arrows " + ANSIColors.RESET;
     }
 
     public void onGameTick() {
@@ -55,12 +57,12 @@ public class Hunter extends Player {
             List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, range);
             Enemy closestEnemy = getClosestEnemyInRange(enemiesInRange, range);
             if (closestEnemy!=null) {
-                combatResult = name + " fired an arrow at " + closestEnemy + ".";
+                combatResult = ANSIColors.CYAN + name + " fired an arrow at " + closestEnemy + "." + ANSIColors.RESET;
                 Result defenseResult = closestEnemy.defend();
                 int defenseRoll = defenseResult.getDiceRoll();
                 combatResult += "\n" + defenseResult.getOutput();
                 int damage = attack - defenseRoll;
-                combatResult += "\n" + this.name + " hit " + closestEnemy.getName() + " for " + Math.max(damage, 0) + " ability damage.";
+                combatResult += "\n" + ANSIColors.BOLD + this.name + " hit " + closestEnemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET;
                 if (damage > 0)
                     closestEnemy.setCurrentHealth(closestEnemy.getCurrentHealth() - damage);
                 if (closestEnemy.getCurrentHealth() <= 0)

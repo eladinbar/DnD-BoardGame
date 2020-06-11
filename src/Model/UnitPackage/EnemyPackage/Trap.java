@@ -11,7 +11,6 @@ public class Trap extends Enemy {
     private Integer invisibilityTime;
     private Integer ticksCount;
     private Boolean visible;
-    private final String ANSI_ORANGE = "\u001B[31;1m";
 
     public Trap(Point position, Traps trap) {
         super(position);

@@ -1,5 +1,6 @@
 package Model.UnitPackage.EnemyPackage;
 
+import Model.ANSIColors;
 import Model.Result;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.PlayerPackage.Player;
@@ -24,8 +25,9 @@ public abstract class Enemy extends Unit {
 
     @Override
     public String engage(Player player) {
-        String combatResult = this.name + " engaged in combat with " + player.getName()
-                + "\n" + this.describe() + "\n" + player.describe();
+        String combatResult = ANSIColors.RED + this.name + " engaged in combat with " + player.getName() + ANSIColors.RESET
+                + "\n" + ANSIColors.BLUE + this.describe() + ANSIColors.RESET
+                + "\n" + ANSIColors.BRIGHT_BLUE + player.describe() + ANSIColors.RESET;
         Result attackResult = this.attack();
         int attackRoll = attackResult.getDiceRoll();
         combatResult += "\n" + attackResult.getOutput();
@@ -33,7 +35,7 @@ public abstract class Enemy extends Unit {
         int defenseRoll = defenseResult.getDiceRoll();
         combatResult += "\n" + defenseResult.getOutput();
         int damage = attackRoll - defenseRoll;
-        combatResult += "\n" + this.name + " dealt " + Math.max(damage, 0) + " damage  to " + player.getName();
+        combatResult += "\n" + ANSIColors.BOLD + this.name + " dealt " + Math.max(damage, 0) + " damage  to " + player.getName() + ANSIColors.RESET;
         if (damage > 0)
             player.setCurrentHealth(player.getCurrentHealth() - damage);
 //        if (player.getCurrentHealth() <= 0) {

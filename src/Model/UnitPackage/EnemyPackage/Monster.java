@@ -20,11 +20,6 @@ public abstract class Monster extends Enemy implements Visitor {
     }
 
     @Override
-    public String visit(Enemy enemy) {
-        return ""; //Do nothing
-    }
-
-    @Override
     public String visit(Player player) {
         return this.engage(player);
     }

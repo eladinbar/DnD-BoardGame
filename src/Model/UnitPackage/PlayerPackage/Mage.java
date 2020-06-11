@@ -1,5 +1,6 @@
 package Model.UnitPackage.PlayerPackage;
 
+import Model.ANSIColors;
 import Model.Result;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.EnemyPackage.Enemy;
@@ -33,11 +34,12 @@ public class Mage extends Player {
     }
 
     @Override
-    public void levelUp() {
-        super.levelUp();
+    public String levelUp() {
+        String output = super.levelUp();
         manaPool += 25 * level;
         currentMana = Math.min(currentMana + manaPool/4, manaPool);
         spellPower += 10 * level;
+        return output + "+" + 10*level + " Health, " + "+" + 25*level + " Mana, " + "+" + 4*level + "Attack, " + "+" + level + "Defense," + "+" + 10*level + " Spellpower" + ANSIColors.RESET;
     }
 
     public void onGameTick() {
@@ -52,7 +54,7 @@ public class Mage extends Player {
             currentMana -= manaCost;
             Integer hits = 0;
             List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, abilityRange);
-            String combatResult = name + " cast Blizzard.";
+            String combatResult = ANSIColors.CYAN + name + " cast Blizzard." + ANSIColors.RESET;
             while (hits < hitsCount & !enemiesInRange.isEmpty()) {
                 //Select random enemy within range
                 Enemy enemy = chooseRandomEnemy(enemiesInRange, abilityRange);
@@ -63,7 +65,7 @@ public class Mage extends Player {
                     int defenseRoll = defenseResult.getDiceRoll();
                     combatResult += "\n" + defenseResult.getOutput();
                     int damage = spellPower - defenseRoll;
-                    combatResult += "\n" + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage.";
+                    combatResult += "\n" + ANSIColors.BOLD + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET;
                     if (damage > 0)
                         enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
                     if (enemy.getCurrentHealth() <= 0)

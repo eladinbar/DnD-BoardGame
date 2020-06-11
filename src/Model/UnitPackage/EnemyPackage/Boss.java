@@ -13,7 +13,6 @@ import java.awt.Point;
 public class Boss extends Monster implements HeroicUnit {
     protected Integer abilityFrequency;
     protected Integer combatTicks;
-    public final String ANSI_PURPLE = "\u001B[35m";
 
     public Boss(Point position, Bosses boss) {
         super(position);
