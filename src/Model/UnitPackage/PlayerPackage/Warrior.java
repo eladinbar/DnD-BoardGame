@@ -1,13 +1,17 @@
 package Model.UnitPackage.PlayerPackage;
 
+import Model.Result;
+import Model.TilePackage.Tile;
+import Model.UnitPackage.EnemyPackage.Enemy;
+
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Warrior extends Player {
-    //Special ability: Avenger’s Shield, randomly hits one enemy withing range < 3 for an amount that
-    //equals to 10% of the warrior’s max health and heals the warrior for an amount equal to (10×defense)
-    //(but will not exceed the total amount of health pool).
     private Integer abilityCooldown;
     private Integer remainingCooldown;
+    private final int AVENGERS_SHIELD_RANGE = 3;
 
     public Warrior(Point position, Warriors warrior) {
         super(position);
@@ -36,14 +40,29 @@ public class Warrior extends Player {
     }
 
     @Override
-    public void castAbility(/*insert parameters*/) throws Exception {
+    public String castAbility(Tile[][] layout, List<Enemy> enemies) throws Exception {
         if (remainingCooldown>0)
-            throw new Exception(/*Insert appropriate message*/);
+            throw new Exception(name + " tried to cast Avenger's Shield but failed. Remaining cooldown is: " + remainingCooldown);
         else {
+            String combatResult = name + " used Avenger's Shield, healing for " + 10*defense + ".";
             remainingCooldown = abilityCooldown;
             currentHealth = Math.min(currentHealth + (10*defense), healthPool);
-            //Randomly hits one enemy within range < 3 for an amount equals to 10% of the warrior’s
-            //health pool
+            Enemy enemy = chooseRandomEnemy(enemies, AVENGERS_SHIELD_RANGE);
+            if (enemy!=null) {
+                Result defenseResult = enemy.defend();
+                int defenseRoll = defenseResult.getDiceRoll();
+                combatResult += "\n" + defenseResult.getOutput();
+                int damage = healthPool/10 - defenseRoll;
+                combatResult += "\n" + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage.";
+                if (damage > 0)
+                    enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
+                if (enemy.getCurrentHealth() <= 0)
+                    this.kill(enemy);
+            }
+            //Special ability: Avenger’s Shield, randomly hits one enemy within range < 3 for an amount that
+            //equals to 10% of the warrior’s max health and heals the warrior for an amount equal to (10×defense)
+            //(but will not exceed the total amount of health pool).
+            return combatResult;
         }
     }
 

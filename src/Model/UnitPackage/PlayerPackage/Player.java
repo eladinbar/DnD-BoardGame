@@ -1,6 +1,7 @@
 package Model.UnitPackage.PlayerPackage;
 
 import Controller.ActionListInput;
+import Model.ANSIColors;
 import Model.Result;
 import Model.TickListener;
 import Model.TilePackage.EmptyTile;
@@ -12,6 +13,8 @@ import Model.UnitPackage.HeroicUnit;
 import Model.UnitPackage.Unit;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Player extends Unit implements HeroicUnit, Visitor, TickListener {
     protected Integer experience;
@@ -43,8 +46,69 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         defense += level;
     }
 
-    public void onPlayerTurn(Tile[][] layout, ActionListInput action) {
+    public void onPlayerTurn(Tile[][] layout, ActionListInput action, List<Enemy> enemies) {
+        if (action == ActionListInput.Left)
+            this.moveLeft(layout);
+        if (action == ActionListInput.Right)
+            this.moveRight(layout);
+        if (action == ActionListInput.Up)
+            this.moveUp(layout);
+        if (action == ActionListInput.Down)
+            this.moveDown(layout);
+        if (action == ActionListInput.CastAbility) {
+            try {
+                this.castAbility(layout, enemies);
+            } catch (Exception ex) {
 
+            }
+        }
+    }
+
+    protected List<Enemy> getAllEnemiesInRange(List<Enemy> enemies, int range) {
+        List<Enemy> enemiesInRange = new ArrayList<>();
+        for (Enemy enemy : enemies) {
+            if (this.range(enemy) < range)
+                enemiesInRange.add(enemy);
+        }
+        return enemiesInRange;
+    }
+
+    protected Enemy chooseRandomEnemy(List<Enemy> enemies, int range) {
+        List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, range);
+        if (!enemiesInRange.isEmpty()) {
+            int random = (int) Math.random() * enemiesInRange.size();
+            return enemiesInRange.get(random);
+        }
+        return null;
+    }
+
+    protected Enemy getClosestEnemyInRange(List<Enemy> enemies, int range) {
+        Enemy closestEnemy = null;
+        double closestRange = Double.MAX_VALUE;
+        for (Enemy enemy : enemies) {
+            double currentRange = this.range(enemy);
+            if (currentRange < closestRange) {
+                closestRange = currentRange;
+                closestEnemy = enemy;
+            }
+        }
+        return closestEnemy;
+    }
+
+    protected void moveLeft(Tile[][] layout) {
+        this.interact(layout[this.position.x-1][this.position.y]);
+    }
+
+    protected void moveRight(Tile[][] layout) {
+        this.interact(layout[this.position.x+1][this.position.y]);
+    }
+
+    protected void moveUp(Tile[][] layout) {
+        this.interact(layout[this.position.x][this.position.y+1]);
+    }
+
+    protected void moveDown(Tile[][] layout) {
+        this.interact(layout[this.position.x][this.position.y-1]);
     }
 
     public void interact(Tile tile) {
@@ -59,11 +123,6 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     @Override
     public String visit(Enemy enemy) {
         return this.engage(enemy);
-    }
-
-    @Override
-    public String visit(Player player) {
-        return ""; //Do nothing
     }
 
     @Override
@@ -88,24 +147,22 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         int defenseRoll = defenseResult.getDiceRoll();
         combatResult += "\n" + defenseResult.getOutput();
         int damage = attackRoll - defenseRoll;
-        combatResult += "\n" + this.name + " dealt " + damage + " damage  to " + enemy.getName();
+        combatResult += "\n" + this.name + " dealt " + Math.max(damage, 0) + " damage  to " + enemy.getName();
         if (damage > 0)
             enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
-        if (enemy.getCurrentHealth() <= 0) {
-            this.gainExp(enemy.getExperienceValue());
-            EmptyTile et = new EmptyTile(this.position);
-            this.setPosition(enemy.getPosition());
-            enemy.setPosition(null);
-        }
+        if (enemy.getCurrentHealth() <= 0)
+            this.kill(enemy);
         return combatResult;
     }
 
-    @Override
-    public String engage(Player player) {
-        return ""; //Do nothing
+    protected void kill(Enemy enemy) {
+        this.gainExp(enemy.getExperienceValue());
+//        EmptyTile et = new EmptyTile(this.position);
+        this.setPosition(enemy.getPosition());
+//        enemy.setPosition(null);
     }
 
     public String toString() {
-        return TEXT_COLOR_GREEN + symbol + ANSI_RESET;
+        return ANSIColors.GREEN + "" + symbol + ANSIColors.RESET;
     }
 }

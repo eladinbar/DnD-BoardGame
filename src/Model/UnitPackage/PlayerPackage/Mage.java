@@ -1,6 +1,11 @@
 package Model.UnitPackage.PlayerPackage;
 
+import Model.Result;
+import Model.TilePackage.Tile;
+import Model.UnitPackage.EnemyPackage.Enemy;
+
 import java.awt.Point;
+import java.util.List;
 
 public class Mage extends Player {
     //Special ability: Blizzard, randomly hit enemies within range for an amount equals to the mage’s
@@ -40,18 +45,33 @@ public class Mage extends Player {
     }
 
     @Override
-    public void castAbility(/*insert parameters*/) throws Exception {
+    public String castAbility(Tile[][] layout, List<Enemy> enemies) throws Exception {
         if (currentMana < manaCost)
-            throw new Exception(/*Insert appropriate message*/);
+            throw new Exception(name + " tried to case Blizzard but does not have enough mana. " + (manaCost-currentMana) + " more mana is required to cast the ability.");
         else {
             currentMana -= manaCost;
             Integer hits = 0;
-            while (hits < hitsCount /*& There exists a living enemy within range*/) {
+            List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, abilityRange);
+            String combatResult = name + " cast Blizzard.";
+            while (hits < hitsCount & !enemiesInRange.isEmpty()) {
                 //Select random enemy within range
-                //Deal damage (reduce health value) to the chosen enemy for an amount equal to spell power
+                Enemy enemy = chooseRandomEnemy(enemiesInRange, abilityRange);
+                //Deal damage to the chosen enemy for an amount equal to spell power
                 //(each enemy may try to defend itself).
+                if (enemy!=null) {
+                    Result defenseResult = enemy.defend();
+                    int defenseRoll = defenseResult.getDiceRoll();
+                    combatResult += "\n" + defenseResult.getOutput();
+                    int damage = spellPower - defenseRoll;
+                    combatResult += "\n" + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage.";
+                    if (damage > 0)
+                        enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
+                    if (enemy.getCurrentHealth() <= 0)
+                        this.kill(enemy);
+                }
                 hits++;
             }
+            return combatResult;
         }
     }
 

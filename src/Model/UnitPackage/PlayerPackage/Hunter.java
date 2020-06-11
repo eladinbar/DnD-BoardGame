@@ -1,6 +1,11 @@
 package Model.UnitPackage.PlayerPackage;
 
+import Model.Result;
+import Model.TilePackage.Tile;
+import Model.UnitPackage.EnemyPackage.Enemy;
+
 import java.awt.Point;
+import java.util.List;
 
 public class Hunter extends Player {
     //Special ability: Shoot, hits the closest enemy for an amount equals to the hunter’s attack points at
@@ -40,15 +45,31 @@ public class Hunter extends Player {
     }
 
     @Override
-    public void castAbility(/*insert parameters*/) throws Exception {
+    public String castAbility(Tile[][] layout, List<Enemy> enemies) throws Exception {
         if (arrowsCount == 0)
-            throw new Exception(/*Insert appropriate message here*/);
-        else if (/*There is no enemy within range*/true)
-            throw new Exception(/*Insert appropriate message here*/);
+            throw new Exception(name + " tried to cast Shoot but does not have enough arrows. " + (10-ticksCount) + " more turns are left until an arrow is replenished.");
+        else if (getAllEnemiesInRange(enemies, range).isEmpty())
+            throw new Exception(name + " Tried to shoot but there were no enemies in range.");
         else {
-            arrowsCount--;
-            //Deal damage equals to attack points to the closest enemy within range (The enemy will try to
+            String combatResult = "";
+            List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, range);
+            Enemy closestEnemy = getClosestEnemyInRange(enemiesInRange, range);
+            if (closestEnemy!=null) {
+                combatResult = name + " fired an arrow at " + closestEnemy + ".";
+                Result defenseResult = closestEnemy.defend();
+                int defenseRoll = defenseResult.getDiceRoll();
+                combatResult += "\n" + defenseResult.getOutput();
+                int damage = attack - defenseRoll;
+                combatResult += "\n" + this.name + " hit " + closestEnemy.getName() + " for " + Math.max(damage, 0) + " ability damage.";
+                if (damage > 0)
+                    closestEnemy.setCurrentHealth(closestEnemy.getCurrentHealth() - damage);
+                if (closestEnemy.getCurrentHealth() <= 0)
+                    this.kill(closestEnemy);
+                arrowsCount--;
+            }
+            //Deal damage equal to attack points to the closest enemy within range (The enemy will try to
             //defend itself).
+            return combatResult;
         }
     }
 

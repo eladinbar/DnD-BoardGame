@@ -1,5 +1,6 @@
 package Model.UnitPackage.EnemyPackage;
 
+import Model.ANSIColors;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.PlayerPackage.Player;
 
@@ -10,6 +11,7 @@ public class Trap extends Enemy {
     private Integer invisibilityTime;
     private Integer ticksCount;
     private Boolean visible;
+    private final String ANSI_ORANGE = "\u001B[31;1m";
 
     public Trap(Point position, Traps trap) {
         super(position);
@@ -60,7 +62,7 @@ public class Trap extends Enemy {
     @Override
     public String toString() {
         if (visible)
-            return "" + symbol;
+            return ANSIColors.BRIGHT_RED + "" + symbol + ANSIColors.RESET;
         else
             return ".";
     }

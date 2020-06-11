@@ -4,6 +4,11 @@ import Model.UnitPackage.EnemyPackage.Enemy;
 import Model.UnitPackage.PlayerPackage.Player;
 
 public interface Combatant {
-    String engage(Enemy enemy);
-    String engage(Player player);
+    default String engage(Enemy enemy) {
+        return null; //Do nothing
+    }
+
+    default String engage(Player player) {
+        return null; //Do nothing
+    }
 }

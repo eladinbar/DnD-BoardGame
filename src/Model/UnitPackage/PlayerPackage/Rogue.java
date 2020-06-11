@@ -1,10 +1,16 @@
 package Model.UnitPackage.PlayerPackage;
 
+import Model.Result;
+import Model.TilePackage.Tile;
+import Model.UnitPackage.EnemyPackage.Enemy;
+
 import java.awt.Point;
+import java.util.List;
 
 public class Rogue extends Player {
     private Integer energyCost;
     private Integer currentEnergy;
+    private final int FAN_OF_KNIVES_RANGE = 2;
 
     public Rogue(Point position, Rogues rogue) {
         super(position);
@@ -30,14 +36,28 @@ public class Rogue extends Player {
     }
 
     @Override
-    public void castAbility(/*insert parameters*/) throws Exception {
+    public String castAbility(Tile[][] layout, List<Enemy> enemies) throws Exception {
         if (currentEnergy < energyCost) {
-            throw new Exception(/*insert appropriate message*/);
+            throw new Exception(name + " tried to cast Fan of Knives but does not have enough energy. " + (energyCost-currentEnergy) + " more energy is required to cast the ability.");
         }
         else {
+            String combatResult = name + " cast Fan of Knives.";
             currentEnergy -= energyCost;
-            //For each enemy within range < 2, deal damage (reduce health value) equals to the rogue’s
+            List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, FAN_OF_KNIVES_RANGE);
+            for (Enemy enemy : enemiesInRange) {
+                Result defenseResult = enemy.defend();
+                int defenseRoll = defenseResult.getDiceRoll();
+                combatResult += "\n" + defenseResult.getOutput();
+                int damage = attack - defenseRoll;
+                combatResult += "\n" + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage.";
+                if (damage > 0)
+                    enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
+                if (enemy.getCurrentHealth() <= 0)
+                    this.kill(enemy);
+            }
+            //For each enemy within range < 2, deal damage equal to the rogue’s
             //attack points (each enemy will try to defend itself).
+            return combatResult;
         }
     }
 
