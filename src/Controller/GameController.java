@@ -77,7 +77,7 @@ public class GameController implements TickManager, DeathObserver{
     }
 
     private void playerTurn(ActionListInput chosenAction){
-        currentPlayer.onPlayerTurn(currentDungeonLevel.getBoard().getLayout(), chosenAction);
+        currentPlayer.onPlayerTurn(currentDungeonLevel.getBoard().getLayout(), chosenAction, currentDungeonLevel.getEnemyList());
     }
 
     private void enemiesTurn(){
