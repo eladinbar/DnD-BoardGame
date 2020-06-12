@@ -100,19 +100,39 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     }
 
     protected String moveLeft(Tile[][] layout) {
-        return this.interact(layout[this.position.x-1][this.position.y]);
+        try {
+            return this.interact(layout[this.position.x - 1][this.position.y]);
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            return ""; //Do nothing
+        }
     }
 
     protected String moveRight(Tile[][] layout) {
-        return this.interact(layout[this.position.x+1][this.position.y]);
+        try {
+            return this.interact(layout[this.position.x + 1][this.position.y]);
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            return ""; //Do nothing
+        }
     }
 
     protected String moveUp(Tile[][] layout) {
-        return this.interact(layout[this.position.x][this.position.y+1]);
+        try {
+            return this.interact(layout[this.position.x][this.position.y + 1]);
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            return ""; //Do nothing
+        }
     }
 
     protected String moveDown(Tile[][] layout) {
-        return this.interact(layout[this.position.x][this.position.y-1]);
+        try {
+            return this.interact(layout[this.position.x][this.position.y - 1]);
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            return ""; //Do nothing
+        }
     }
 
     public String interact(Tile tile) {

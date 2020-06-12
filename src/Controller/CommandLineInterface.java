@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.ANSIColors;
 import Model.UnitPackage.PlayerPackage.*;
 import View.PlayerSelectionMenu;
 import java.util.List;
@@ -38,7 +39,7 @@ public class CommandLineInterface {
                 controller.loadLevel(getNextLevelPath());
                 continue;
             } else if(!controller.isEnemiesAlive() && !hasNextLevel()){
-                System.out.println("You have cleared the dungeon.\ncongratulations!\nY-O-U  W-I-N");
+                System.out.println(ANSIColors.BRIGHT_GREEN + "You have cleared the dungeon.\ncongratulations!\nY-O-U  W-I-N!" + ANSIColors.RESET);
                 break;
             }
            controller.round(getAction(receiveInput()));

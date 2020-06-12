@@ -36,19 +36,39 @@ public abstract class Monster extends Enemy implements Visitor {
     }
 
     protected String moveLeft(Tile[][] layout) {
-        return this.interact(layout[this.position.x-1][this.position.y]);
+        try {
+            return this.interact(layout[this.position.x - 1][this.position.y]);
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            return ""; //Do nothing
+        }
     }
 
     protected String moveRight(Tile[][] layout) {
-        return this.interact(layout[this.position.x+1][this.position.y]);
+        try {
+            return this.interact(layout[this.position.x + 1][this.position.y]);
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            return ""; //Do nothing
+        }
     }
 
     protected String moveUp(Tile[][] layout) {
-        return this.interact(layout[this.position.x][this.position.y+1]);
+        try {
+            return this.interact(layout[this.position.x][this.position.y + 1]);
+        }
+        catch(ArrayIndexOutOfBoundsException ex) {
+            return ""; //Do nothing
+        }
     }
 
     protected String moveDown(Tile[][] layout) {
-        return this.interact(layout[this.position.x][this.position.y-1]);
+        try {
+            return this.interact(layout[this.position.x][this.position.y - 1]);
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            return ""; //Do nothing
+        }
     }
 
     protected String randomMovement(Tile[][] layout) {

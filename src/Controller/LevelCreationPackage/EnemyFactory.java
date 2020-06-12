@@ -18,7 +18,7 @@ public class EnemyFactory implements AbstractTileFactory {
             case 'q':
                 return new Minion(position, Minions.QUEENS_GUARD);
             case 'z':
-                return new Minion(position, Minions.WIRGHT);
+                return new Minion(position, Minions.WRIGHT);
             case 'b':
                 return new Minion(position, Minions.BEAR_WRIGHT);
             case 'g':
