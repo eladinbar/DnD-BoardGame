@@ -1,7 +1,7 @@
 package Controller;
 
-import Model.UnitPackage.PlayerPackage.*;
-import Model.UnitPackage.EnemyPackage.*;
+import Model.UnitPackage.PlayerPackage.Player;
+import Model.UnitPackage.EnemyPackage.Enemy;
 
 public interface DeathObserver {
     void update(Enemy enemy);

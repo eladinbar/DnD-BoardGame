@@ -3,7 +3,7 @@ package Model.UnitPackage.PlayerPackage;
 import Controller.ActionListInput;
 import Model.ANSIColors;
 import Model.Result;
-import Model.TickListener;
+import Model.UnitPackage.TickListener;
 import Model.TilePackage.EmptyTile;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.Visitor;

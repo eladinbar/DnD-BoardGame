@@ -1,11 +1,9 @@
 package View;
 
-import Model.TilePackage.*;
+import Model.TilePackage.Tile;
 
 public class GameBoard implements GameInfo {
-
     private Tile[][] layout;
-
 
     public GameBoard(Tile[][] layout){
         this.layout = layout;

@@ -6,7 +6,7 @@ import Model.UnitPackage.PlayerPackage.Player;
 import View.GameBoard;
 import View.Level;
 
-import java.awt.*;
+import java.awt.Point;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,9 +15,7 @@ import java.util.List;
 
 
 public class LevelCreator {
-
     private List<Enemy> enemyList;
-
 
     public LevelCreator(){
         enemyList = new ArrayList<>();

@@ -1,9 +1,9 @@
 package Controller;
+
 import Controller.LevelCreationPackage.LevelCreator;
-import Model.UnitPackage.EnemyPackage.*;
-import Model.UnitPackage.PlayerPackage.*;
-import Model.TickListener;
-import View.*;
+import Model.UnitPackage.EnemyPackage.Enemy;
+import Model.UnitPackage.PlayerPackage.Player;
+import Model.UnitPackage.TickListener;
 import View.Level;
 
 import java.util.ArrayList;
@@ -23,7 +23,6 @@ public class GameController implements TickManager, DeathObserver{
         this.currentPlayer = chosenPlayer;
         this.listeners = new ArrayList<>();
     }
-
 
     @Override
     public void update(Enemy enemy) {
@@ -97,6 +96,4 @@ public class GameController implements TickManager, DeathObserver{
     private void resetTickCounter(){
         levelTickCounter = 0;
     }
-
-
 }

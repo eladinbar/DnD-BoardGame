@@ -4,7 +4,7 @@ import Model.TilePackage.EmptyTile;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.EnemyPackage.*;
 
-import java.awt.*;
+import java.awt.Point;
 
 public class EnemyFactory implements AbstractTileFactory {
 

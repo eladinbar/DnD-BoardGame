@@ -33,6 +33,4 @@ public class PlayerSelectionMenu implements GameInfo {
         roguesList.stream().forEach((x) -> System.out.println(x));
         huntersList.stream().forEach((x) -> System.out.println(x));
     }
-
-
 }

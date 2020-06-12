@@ -2,10 +2,9 @@ package Controller;
 
 import View.GameBoard;
 
-import java.awt.*;
+import java.awt.Point;
 
 public class Level {
-
     private GameBoard board;
     private Point startLocation;
 

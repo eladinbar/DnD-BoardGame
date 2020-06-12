@@ -3,7 +3,7 @@ package Controller.LevelCreationPackage;
 import Model.TilePackage.Tile;
 import Model.TilePackage.Wall;
 
-import java.awt.*;
+import java.awt.Point;
 
 public class WallTileFactory implements AbstractTileFactory {
 

@@ -3,7 +3,7 @@ package Controller.LevelCreationPackage;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.PlayerPackage.*;
 
-import java.awt.*;
+import java.awt.Point;
 
 public class PlayerFactory implements AbstractTileFactory {
     @Override

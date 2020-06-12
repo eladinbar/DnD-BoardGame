@@ -20,7 +20,6 @@ public class CommandLineInterface {
         chosenPlayer = null;
     }
 
-
     public void start() {
         selectionMenu.printInfo();
         selectPlayer(receiveInput());
@@ -107,5 +106,4 @@ public class CommandLineInterface {
             }
         }
     }
-
 }

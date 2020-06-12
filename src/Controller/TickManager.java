@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.TickListener;
+import Model.UnitPackage.TickListener;
 
 public interface TickManager {
     boolean addListener(TickListener listener);
