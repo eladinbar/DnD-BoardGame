@@ -46,9 +46,9 @@ public class Minion extends Monster {
             }
             else
                 if (dy > 0)
-                    output = this.moveDown(layout);
-                else
                     output = this.moveUp(layout);
+                else
+                    output = this.moveDown(layout);
         }
         else
             output = this.randomMovement(layout);

@@ -38,7 +38,7 @@ public class Warrior extends Player {
     }
 
     public void onGameTick() {
-        remainingCooldown -= 1;
+        setRemainingCooldown(remainingCooldown-1);
     }
 
     @Override
@@ -74,5 +74,9 @@ public class Warrior extends Player {
                 + defense + String.format("%14s", "Level: ") + level + String.format("%16s", "Experience: ") + experience+"/"+experienceThreshold +
                 String.format("%15s", "Cooldown: ") + remainingCooldown+"/"+abilityCooldown;
         //returns full information on the current unit.
+    }
+
+    public void setRemainingCooldown(Integer remainingCooldown) {
+        this.remainingCooldown = Math.max(remainingCooldown, 0);
     }
 }

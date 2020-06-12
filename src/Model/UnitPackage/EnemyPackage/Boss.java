@@ -67,9 +67,9 @@ public class Boss extends Monster implements HeroicUnit {
             }
             else {
                 if (dy > 0)
-                    output = this.moveDown(layout);
-                else
                     output = this.moveUp(layout);
+                else
+                    output = this.moveDown(layout);
             }
         }
         else {

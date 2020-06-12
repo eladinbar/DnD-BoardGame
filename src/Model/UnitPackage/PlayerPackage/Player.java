@@ -125,7 +125,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
 
     protected String moveUp(Tile[][] layout) {
         try {
-            return this.interact(layout[this.position.x][this.position.y + 1]);
+            return this.interact(layout[this.position.x][this.position.y - 1]);
         }
         catch (ArrayIndexOutOfBoundsException ex) {
             return ""; //Do nothing
@@ -134,7 +134,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
 
     protected String moveDown(Tile[][] layout) {
         try {
-            return this.interact(layout[this.position.x][this.position.y - 1]);
+            return this.interact(layout[this.position.x][this.position.y + 1]);
         }
         catch (ArrayIndexOutOfBoundsException ex) {
             return ""; //Do nothing
