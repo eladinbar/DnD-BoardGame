@@ -2,6 +2,7 @@ package Model.UnitPackage.PlayerPackage;
 
 import Model.ANSIColors;
 import Model.Result;
+import Model.TilePackage.EmptyTile;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.EnemyPackage.Enemy;
 
@@ -56,7 +57,8 @@ public class Rogue extends Player {
                     enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
                 if (enemy.getCurrentHealth() <= 0) {
                     combatResult += "\n" + this.kill(enemy);
-                    enemy.setPosition(null);
+                    layout[enemy.getPosition().x][enemy.getPosition().y] = new EmptyTile(enemy.getPosition());
+                    enemies.remove(enemy);
                 }
             }
             //For each enemy within range < 2, deal damage equal to the rogue’s

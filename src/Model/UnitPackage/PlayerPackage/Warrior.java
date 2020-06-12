@@ -2,6 +2,7 @@ package Model.UnitPackage.PlayerPackage;
 
 import Model.ANSIColors;
 import Model.Result;
+import Model.TilePackage.EmptyTile;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.EnemyPackage.Enemy;
 
@@ -61,7 +62,8 @@ public class Warrior extends Player {
                     enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
                 if (enemy.getCurrentHealth() <= 0) {
                     combatResult += "\n" + this.kill(enemy);
-                    enemy.setPosition(null);
+                    layout[enemy.getPosition().x][enemy.getPosition().y] = new EmptyTile(enemy.getPosition());
+                    enemies.remove(enemy);
                 }
             }
             //Special ability: Avenger’s Shield, randomly hits one enemy within range < 3 for an amount that

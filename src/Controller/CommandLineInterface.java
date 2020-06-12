@@ -38,7 +38,7 @@ public class CommandLineInterface {
                 controller.loadLevel(getNextLevelPath());
                 continue;
             } else if(!controller.isEnemiesAlive() && !hasNextLevel()){
-                System.out.println(ANSIColors.BRIGHT_GREEN.value() + "You have cleared the dungeon.\ncongratulations!\nY-O-U  W-I-N!" + ANSIColors.RESET.value());
+                System.out.println(ANSIColors.BRIGHT_GREEN.value() + "You have cleared the dungeon.\nCongratulations!\nY-O-U  W-I-N!" + ANSIColors.RESET.value());
                 break;
             }
            controller.round(getAction(receiveInput()));

@@ -2,6 +2,7 @@ package Model.UnitPackage.PlayerPackage;
 
 import Model.ANSIColors;
 import Model.Result;
+import Model.TilePackage.EmptyTile;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.EnemyPackage.Enemy;
 
@@ -68,7 +69,8 @@ public class Hunter extends Player {
                 closestEnemy.setCurrentHealth(closestEnemy.getCurrentHealth() - damage);
             if (closestEnemy.getCurrentHealth() <= 0) {
                 combatResult += "\n" + this.kill(closestEnemy);
-                closestEnemy.setPosition(null);
+                layout[closestEnemy.getPosition().x][closestEnemy.getPosition().y] = new EmptyTile(closestEnemy.getPosition());
+                enemies.remove(closestEnemy);
             }
             arrowsCount--;
         }

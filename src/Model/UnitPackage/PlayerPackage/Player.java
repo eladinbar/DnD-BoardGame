@@ -180,7 +180,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         int defenseRoll = defenseResult.getDiceRoll();
         combatResult += "\n" + defenseResult.getOutput();
         int damage = attackRoll - defenseRoll;
-        combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " dealt " + Math.max(damage, 0) + " damage  to " + enemy.getName() + ANSIColors.RESET.value();
+        combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " dealt " + Math.max(damage, 0) + " damage to " + enemy.getName() + ANSIColors.RESET.value();
         if (damage > 0)
             enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
         if (enemy.getCurrentHealth() <= 0) {
