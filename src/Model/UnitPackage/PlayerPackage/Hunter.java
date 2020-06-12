@@ -50,29 +50,29 @@ public class Hunter extends Player {
         //the cost of an arrow.
         if (arrowsCount == 0)
             throw new Exception(name + " tried to cast Shoot but does not have enough arrows. " + (10-ticksCount) + " more turns are left until an arrow is replenished.");
-        else if (getAllEnemiesInRange(enemies, range).isEmpty())
-            throw new Exception(name + " Tried to shoot but there were no enemies in range.");
-        else {
-            String combatResult = "";
-            List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, range);
-            Enemy closestEnemy = getClosestEnemyInRange(enemiesInRange, range);
-            if (closestEnemy!=null) {
-                combatResult = ANSIColors.CYAN.value() + name + " fired an arrow at " + closestEnemy.getName() + "." + ANSIColors.RESET.value();
-                Result defenseResult = closestEnemy.defend();
-                int defenseRoll = defenseResult.getDiceRoll();
-                combatResult += "\n" + defenseResult.getOutput();
-                int damage = attack - defenseRoll;
-                combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + closestEnemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
-                if (damage > 0)
-                    closestEnemy.setCurrentHealth(closestEnemy.getCurrentHealth() - damage);
-                if (closestEnemy.getCurrentHealth() <= 0)
-                    this.kill(closestEnemy);
-                arrowsCount--;
-            }
-            //Deal damage equal to attack points to the closest enemy within range (The enemy will try to
-            //defend itself).
-            return combatResult;
+
+        List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, range);
+        if (enemiesInRange.isEmpty())
+            throw new Exception(name + " tried to shoot but there were no enemies in range.");
+
+        String combatResult = "";
+        Enemy closestEnemy = getClosestEnemyInRange(enemiesInRange, range);
+        if (closestEnemy!=null) {
+            combatResult = ANSIColors.CYAN.value() + name + " fired an arrow at " + closestEnemy.getName() + "." + ANSIColors.RESET.value();
+            Result defenseResult = closestEnemy.defend();
+            int defenseRoll = defenseResult.getDiceRoll();
+            combatResult += "\n" + defenseResult.getOutput();
+            int damage = attack - defenseRoll;
+            combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + closestEnemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
+            if (damage > 0)
+                closestEnemy.setCurrentHealth(closestEnemy.getCurrentHealth() - damage);
+            if (closestEnemy.getCurrentHealth() <= 0)
+                this.kill(closestEnemy);
+            arrowsCount--;
         }
+        //Deal damage equal to attack points to the closest enemy within range (The enemy will try to
+        //defend itself).
+        return combatResult;
     }
 
     @Override

@@ -34,7 +34,7 @@ public class Rogue extends Player {
     }
 
     public void onGameTick() {
-        currentEnergy = Math.min(currentEnergy + 10, 100);
+        setCurrentEnergy(currentEnergy + 10);
     }
 
     @Override
@@ -69,5 +69,9 @@ public class Rogue extends Player {
                 + defense + String.format("%14s", "Level: ") + level + String.format("%16s", "Experience: ") + experience+"/"+experienceThreshold +
                 String.format("%15s", "Energy: ") + currentEnergy+"/"+energyCost;
         //returns full information on the current unit.
+    }
+
+    public void setCurrentEnergy(Integer currentEnergy) {
+        this.currentEnergy = Math.min(currentEnergy, 100);
     }
 }

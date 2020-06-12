@@ -31,7 +31,7 @@ public abstract class Monster extends Enemy implements Visitor {
 
     @Override
     public String visit(EmptyTile emptyTile) {
-        this.setPosition(emptyTile.getPosition());
+        this.switchPosition(emptyTile);
         return "";
     }
 
@@ -72,7 +72,7 @@ public abstract class Monster extends Enemy implements Visitor {
     }
 
     protected String randomMovement(Tile[][] layout) {
-        int rand = (int)Math.random()*4;
+        int rand = (int)Math.random()*5;
         switch(rand) {
             case 0:
                 return this.moveLeft(layout);

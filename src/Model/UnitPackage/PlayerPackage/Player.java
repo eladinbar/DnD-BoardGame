@@ -50,22 +50,28 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     }
 
     public String onPlayerTurn(Tile[][] layout, ActionListInput action, List<Enemy> enemies) {
+        Point originalPosition = this.position;
+        String output="";
         if (action == ActionListInput.Left)
-            return this.moveLeft(layout);
+            output = this.moveLeft(layout);
         else if (action == ActionListInput.Right)
-            return this.moveRight(layout);
+            output = this.moveRight(layout);
         else if (action == ActionListInput.Up)
-            return this.moveUp(layout);
+            output = this.moveUp(layout);
         else if (action == ActionListInput.Down)
-            return this.moveDown(layout);
+            output = this.moveDown(layout);
         else if (action == ActionListInput.CastAbility) {
             try {
-                return this.castAbility(layout, enemies);
+                output = this.castAbility(layout, enemies);
             } catch (Exception ex) {
-
+                output = ex.getMessage();
             }
         }
-        return ""; //Do nothing
+        if (!this.position.equals(originalPosition)) {
+            layout[this.position.x][this.position.y] = this;
+            layout[originalPosition.x][originalPosition.y] = new EmptyTile(originalPosition);
+        }
+        return output;
     }
 
     protected List<Enemy> getAllEnemiesInRange(List<Enemy> enemies, int range) {
@@ -156,7 +162,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
 
     @Override
     public String visit(EmptyTile emptyTile) {
-        this.setPosition(emptyTile.getPosition());
+        this.switchPosition(emptyTile);
         return "";
     }
 
@@ -185,6 +191,10 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
 //        EmptyTile et = new EmptyTile(this.position);
         this.setPosition(enemy.getPosition());
 //        enemy.setPosition(null);
+    }
+
+    public void die() {
+        this.symbol = PlayerStatus.DEAD.getPlayerStatus();
     }
 
     public String toString() {

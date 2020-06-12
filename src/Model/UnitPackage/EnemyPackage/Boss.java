@@ -2,6 +2,7 @@ package Model.UnitPackage.EnemyPackage;
 
 import Model.ANSIColors;
 import Model.Result;
+import Model.TilePackage.EmptyTile;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.HeroicUnit;
 import Model.UnitPackage.PlayerPackage.Player;
@@ -38,14 +39,16 @@ public class Boss extends Monster implements HeroicUnit {
 //        ∗ Boss can move 1 step in the following directions: Up/Down/Left/Right, and may chase the
 //          player if the player is within its vision range.
 //        ∗ Movement rules are mostly similar to the monster’s rules, except:
+        Point originalPosition = this.position;
+        String output="";
         double rangeFromPlayer = this.range(player);
         if (combatTicks == abilityFrequency & rangeFromPlayer < abilityRange) {
             combatTicks = 0;
             try {
-                return this.castAbility(layout, player);
+                output = this.castAbility(layout, player);
             }
             catch(Exception ex) {
-                return "";
+                return output;
             }
 //          - The boss cast the ability: shooting at the player for an amount that equals to the boss's
 //            ability damage points if the player is within ability range (the player will try to defend himself).
@@ -58,21 +61,26 @@ public class Boss extends Monster implements HeroicUnit {
             dy = this.position.y - player.getPosition().y;
             if (Math.abs(dx) > Math.abs(dy)) {
                 if (dx > 0)
-                    return this.moveLeft(layout);
+                    output = this.moveLeft(layout);
                 else
-                    return this.moveRight(layout);
+                    output = this.moveRight(layout);
             }
             else {
                 if (dy > 0)
-                    return this.moveDown(layout);
+                    output = this.moveDown(layout);
                 else
-                    return this.moveUp(layout);
+                    output = this.moveUp(layout);
             }
         }
         else {
             combatTicks = 0;
-            return this.randomMovement(layout);
+            output = this.randomMovement(layout);
         }
+        if (!this.position.equals(originalPosition)) {
+            layout[this.position.x][this.position.y] = this;
+            layout[originalPosition.x][originalPosition.y] = new EmptyTile(originalPosition);
+        }
+        return output;
     }
 
     @Override
@@ -90,8 +98,8 @@ public class Boss extends Monster implements HeroicUnit {
         combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + player.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
         if (damage > 0)
             player.setCurrentHealth(player.getCurrentHealth() - damage);
-//      if (player.getCurrentHealth() <= 0)
-//          player.die();
+        if (player.getCurrentHealth() <= 0)
+            player.die();
         return combatResult;
     }
 

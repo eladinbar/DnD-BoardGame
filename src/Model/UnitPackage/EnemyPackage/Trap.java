@@ -53,10 +53,8 @@ public class Trap extends Enemy {
     public String describe() {
         return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%14s", "Attack: ") + attack + String.format("%14s", "Defense: ")
                 + defense + String.format("%21s", "Experience Value: ") + experienceValue;
-        //returns full information of the current unit.
-        //Use it to print the information of each unit during combat / on player’s turn.
-        //You can override the Trap :: toString() method so it returns different characters depending
-        //on its visibility state.
+        //returns full information on the current unit.
+        //returns different characters depending on its visibility state.
     }
 
     @Override
