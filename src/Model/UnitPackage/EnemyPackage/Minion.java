@@ -60,6 +60,6 @@ public class Minion extends Monster {
 
     @Override
     public String toString() {
-        return ANSIColors.RED + "" + symbol + ANSIColors.RESET;
+        return ANSIColors.RED.value() + "" + symbol + ANSIColors.RESET.value();
     }
 }

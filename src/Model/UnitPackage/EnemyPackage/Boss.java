@@ -82,12 +82,12 @@ public class Boss extends Monster implements HeroicUnit {
 
     @Override
     public String castAbility(Tile[][] layout, Player player) throws Exception {
-        String combatResult = ANSIColors.BRIGHT_MAGENTA + name + " cast " + abilityName + " at " + player.getName() + "." + ANSIColors.RESET;
+        String combatResult = ANSIColors.BRIGHT_MAGENTA.value() + name + " cast " + abilityName + " at " + player.getName() + "." + ANSIColors.RESET.value();
         Result defenseResult = player.defend();
         int defenseRoll = defenseResult.getDiceRoll();
         combatResult += "\n" + defenseResult.getOutput();
         int damage = abilityDamage - defenseRoll;
-        combatResult += "\n" + ANSIColors.BOLD + this.name + " hit " + player.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET;
+        combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + player.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
         if (damage > 0)
             player.setCurrentHealth(player.getCurrentHealth() - damage);
 //      if (player.getCurrentHealth() <= 0)
@@ -104,6 +104,6 @@ public class Boss extends Monster implements HeroicUnit {
 
     @Override
     public String toString() {
-        return ANSIColors.MAGENTA + "" + symbol + ANSIColors.RESET;
+        return ANSIColors.MAGENTA.value() + "" + symbol + ANSIColors.RESET.value();
     }
 }

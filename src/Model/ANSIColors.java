@@ -25,4 +25,8 @@ public enum ANSIColors {
     ANSIColors(String colorCode) {
         this.colorCode = colorCode;
     }
+
+    public String value() {
+        return colorCode;
+    }
 }

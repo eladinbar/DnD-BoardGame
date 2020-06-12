@@ -30,7 +30,7 @@ public class Rogue extends Player {
         String output = super.levelUp();
         currentEnergy = 100;
         attack += 3 * level;
-        return output + "+" + 10*level + " Health, " + "+" + 7*level + " Attack, " + "+" + level + " Defense" + ANSIColors.RESET;
+        return output + "+" + 10*level + " Health, " + "+" + 7*level + " Attack, " + "+" + level + " Defense" + ANSIColors.RESET.value();
     }
 
     public void onGameTick() {
@@ -43,7 +43,7 @@ public class Rogue extends Player {
             throw new Exception(name + " tried to cast Fan of Knives but does not have enough energy. " + (energyCost-currentEnergy) + " more energy is required to cast the ability.");
         }
         else {
-            String combatResult = ANSIColors.CYAN + name + " cast Fan of Knives." + ANSIColors.RESET;
+            String combatResult = ANSIColors.CYAN.value() + name + " cast Fan of Knives." + ANSIColors.RESET.value();
             currentEnergy -= energyCost;
             List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, FAN_OF_KNIVES_RANGE);
             for (Enemy enemy : enemiesInRange) {
@@ -51,7 +51,7 @@ public class Rogue extends Player {
                 int defenseRoll = defenseResult.getDiceRoll();
                 combatResult += "\n" + defenseResult.getOutput();
                 int damage = attack - defenseRoll;
-                combatResult += "\n" + ANSIColors.BOLD + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET;
+                combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
                 if (damage > 0)
                     enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
                 if (enemy.getCurrentHealth() <= 0)

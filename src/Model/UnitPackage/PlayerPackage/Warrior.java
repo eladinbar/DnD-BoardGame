@@ -34,7 +34,7 @@ public class Warrior extends Player {
         healthPool += 5 * level;
         attack += 2 * level;
         defense += level;
-        return output + "+" + 15*level + " Health, " + "+" + 6*level + "Attack, " + "+" + 2*level + "Defense" + ANSIColors.RESET;
+        return output + "+" + 15*level + " Health, " + "+" + 6*level + "Attack, " + "+" + 2*level + "Defense" + ANSIColors.RESET.value();
     }
 
     public void onGameTick() {
@@ -46,7 +46,7 @@ public class Warrior extends Player {
         if (remainingCooldown>0)
             throw new Exception(name + " tried to cast Avenger's Shield but failed. Remaining cooldown is: " + remainingCooldown);
         else {
-            String combatResult = ANSIColors.CYAN + name + " used Avenger's Shield, healing for " + 10*defense + "." + ANSIColors.RESET;
+            String combatResult = ANSIColors.CYAN.value() + name + " used Avenger's Shield, healing for " + 10*defense + "." + ANSIColors.RESET.value();
             remainingCooldown = abilityCooldown;
             currentHealth = Math.min(currentHealth + (10*defense), healthPool);
             Enemy enemy = chooseRandomEnemy(enemies, AVENGERS_SHIELD_RANGE);
@@ -55,7 +55,7 @@ public class Warrior extends Player {
                 int defenseRoll = defenseResult.getDiceRoll();
                 combatResult += "\n" + defenseResult.getOutput();
                 int damage = healthPool/10 - defenseRoll;
-                combatResult += "\n" + ANSIColors.BOLD + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET;
+                combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
                 if (damage > 0)
                     enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
                 if (enemy.getCurrentHealth() <= 0)

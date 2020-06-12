@@ -32,7 +32,7 @@ public class Hunter extends Player {
         arrowsCount += 10 * level;
         attack += 2 * level;
         defense += level;
-        return output + "+" + 10*level + " Health, " + "+" + 6*level + "Attack, " + "+" + 2*level + "Defense, " + "+" + 10*level + " Arrows " + ANSIColors.RESET;
+        return output + "+" + 10*level + " Health, " + "+" + 6*level + "Attack, " + "+" + 2*level + "Defense, " + "+" + 10*level + " Arrows " + ANSIColors.RESET.value();
     }
 
     public void onGameTick() {
@@ -57,12 +57,12 @@ public class Hunter extends Player {
             List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, range);
             Enemy closestEnemy = getClosestEnemyInRange(enemiesInRange, range);
             if (closestEnemy!=null) {
-                combatResult = ANSIColors.CYAN + name + " fired an arrow at " + closestEnemy.getName() + "." + ANSIColors.RESET;
+                combatResult = ANSIColors.CYAN.value() + name + " fired an arrow at " + closestEnemy.getName() + "." + ANSIColors.RESET.value();
                 Result defenseResult = closestEnemy.defend();
                 int defenseRoll = defenseResult.getDiceRoll();
                 combatResult += "\n" + defenseResult.getOutput();
                 int damage = attack - defenseRoll;
-                combatResult += "\n" + ANSIColors.BOLD + this.name + " hit " + closestEnemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET;
+                combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + closestEnemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
                 if (damage > 0)
                     closestEnemy.setCurrentHealth(closestEnemy.getCurrentHealth() - damage);
                 if (closestEnemy.getCurrentHealth() <= 0)

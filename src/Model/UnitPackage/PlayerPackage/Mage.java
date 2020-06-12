@@ -54,7 +54,7 @@ public class Mage extends Player {
             currentMana -= manaCost;
             Integer hits = 0;
             List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, abilityRange);
-            String combatResult = ANSIColors.CYAN + name + " cast Blizzard." + ANSIColors.RESET;
+            String combatResult = ANSIColors.CYAN.value() + name + " cast Blizzard." + ANSIColors.RESET.value();
             while (hits < hitsCount & !enemiesInRange.isEmpty()) {
                 //Select a random enemy within range
                 Enemy enemy = chooseRandomEnemy(enemiesInRange, abilityRange);
@@ -65,7 +65,7 @@ public class Mage extends Player {
                     int defenseRoll = defenseResult.getDiceRoll();
                     combatResult += "\n" + defenseResult.getOutput();
                     int damage = spellPower - defenseRoll;
-                    combatResult += "\n" + ANSIColors.BOLD + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET;
+                    combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
                     if (damage > 0)
                         enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
                     if (enemy.getCurrentHealth() <= 0)

@@ -62,7 +62,7 @@ public class Trap extends Enemy {
     @Override
     public String toString() {
         if (visible)
-            return ANSIColors.BRIGHT_RED + "" + symbol + ANSIColors.RESET;
+            return ANSIColors.BRIGHT_RED.value() + "" + symbol + ANSIColors.RESET.value();
         else
             return ".";
     }

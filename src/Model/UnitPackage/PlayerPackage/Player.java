@@ -46,7 +46,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         currentHealth = healthPool;
         attack += 4 * level;
         defense += level;
-        return ANSIColors.BRIGHT_YELLOW + name + " reached level " + level + ": ";
+        return ANSIColors.BRIGHT_YELLOW.value() + name + " reached level " + level + ": ";
     }
 
     public String onPlayerTurn(Tile[][] layout, ActionListInput action, List<Enemy> enemies) {
@@ -162,9 +162,9 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
 
     @Override
     public String engage(Enemy enemy) {
-        String combatResult = ANSIColors.GREEN + this.name + " engaged in combat with " + enemy.getName() + ANSIColors.RESET
-                                + "\n" + ANSIColors.BRIGHT_BLUE + this.describe() + ANSIColors.RESET
-                                + "\n" + ANSIColors.BLUE + enemy.describe() + ANSIColors.RESET;
+        String combatResult = ANSIColors.GREEN.value() + this.name + " engaged in combat with " + enemy.getName() + ANSIColors.RESET.value()
+                                + "\n" + ANSIColors.BRIGHT_BLUE.value() + this.describe() + ANSIColors.RESET.value()
+                                + "\n" + ANSIColors.BLUE.value() + enemy.describe() + ANSIColors.RESET.value();
         Result attackResult = this.attack();
         int attackRoll = attackResult.getDiceRoll();
         combatResult += "\n" + attackResult.getOutput();
@@ -172,7 +172,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         int defenseRoll = defenseResult.getDiceRoll();
         combatResult += "\n" + defenseResult.getOutput();
         int damage = attackRoll - defenseRoll;
-        combatResult += "\n" + ANSIColors.BOLD + this.name + " dealt " + Math.max(damage, 0) + " damage  to " + enemy.getName() + ANSIColors.RESET;
+        combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " dealt " + Math.max(damage, 0) + " damage  to " + enemy.getName() + ANSIColors.RESET.value();
         if (damage > 0)
             enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
         if (enemy.getCurrentHealth() <= 0)
@@ -188,6 +188,6 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     }
 
     public String toString() {
-        return ANSIColors.GREEN + "" + symbol + ANSIColors.RESET;
+        return ANSIColors.GREEN.value() + "" + symbol + ANSIColors.RESET.value();
     }
 }
