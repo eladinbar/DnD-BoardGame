@@ -15,13 +15,13 @@ public class PlayerSelectionMenu implements GameInfo {
 
     public PlayerSelectionMenu() {
         warriorsList = Arrays.stream(Warriors.values()).
-                map((character) -> ANSIColors.RED.value() + "" + character.getMenuPosition() + ". " + new Warrior(null, character).describe() + ANSIColors.RESET.value()).collect(Collectors.toList());
+                map((character) -> ANSIColors.RED.value() + character.getMenuPosition() + ". " + new Warrior(null, character).describe() + ANSIColors.RESET.value()).collect(Collectors.toList());
         magesList = Arrays.stream(Mages.values()).
-                map((character) -> ANSIColors.BRIGHT_BLUE.value() + "" + character.getMenuPosition() + ". " + new Mage(null, character).describe() + ANSIColors.RESET.value()).collect(Collectors.toList());
+                map((character) -> ANSIColors.BRIGHT_BLUE.value() + character.getMenuPosition() + ". " + new Mage(null, character).describe() + ANSIColors.RESET.value()).collect(Collectors.toList());
         roguesList = Arrays.stream(Rogues.values()).
-                map((character) -> ANSIColors.BRIGHT_BLACK.value() + "" + character.getMenuPosition() + ". " + new Rogue(null, character).describe() + ANSIColors.RESET.value()).collect(Collectors.toList());
+                map((character) -> ANSIColors.BRIGHT_BLACK.value() + character.getMenuPosition() + ". " + new Rogue(null, character).describe() + ANSIColors.RESET.value()).collect(Collectors.toList());
         huntersList = Arrays.stream(Hunters.values()).
-                map((character) -> ANSIColors.BRIGHT_GREEN.value() + "" + character.getMenuPosition() + ". " + new Hunter(null, character).describe() + ANSIColors.RESET.value()).collect(Collectors.toList());
+                map((character) -> ANSIColors.BRIGHT_GREEN.value() + character.getMenuPosition() + ". " + new Hunter(null, character).describe() + ANSIColors.RESET.value()).collect(Collectors.toList());
     }
 
     @Override

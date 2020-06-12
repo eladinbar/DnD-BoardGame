@@ -112,6 +112,6 @@ public class Boss extends Monster implements HeroicUnit {
 
     @Override
     public String toString() {
-        return ANSIColors.MAGENTA.value() + "" + symbol + ANSIColors.RESET.value();
+        return ANSIColors.MAGENTA.value() + symbol + ANSIColors.RESET.value();
     }
 }

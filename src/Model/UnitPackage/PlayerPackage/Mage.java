@@ -39,7 +39,7 @@ public class Mage extends Player {
         manaPool += 25 * level;
         currentMana = Math.min(currentMana + manaPool/4, manaPool);
         spellPower += 10 * level;
-        return output + "+" + 10*level + " Health, " + "+" + 25*level + " Mana, " + "+" + 4*level + "Attack, " + "+" + level + "Defense," + "+" + 10*level + " Spellpower" + ANSIColors.RESET;
+        return output + "+" + 10*level + " Health, " + "+" + 25*level + " Mana, " + "+" + 4*level + " Attack, " + "+" + level + " Defense," + "+" + 10*level + " Spellpower" + ANSIColors.RESET;
     }
 
     public void onGameTick() {
@@ -68,8 +68,10 @@ public class Mage extends Player {
                     combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
                     if (damage > 0)
                         enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
-                    if (enemy.getCurrentHealth() <= 0)
-                        this.kill(enemy);
+                    if (enemy.getCurrentHealth() <= 0) {
+                        combatResult += "\n" + this.kill(enemy);
+                        enemy.setPosition(null);
+                    }
                 }
                 hits++;
             }

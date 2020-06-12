@@ -41,7 +41,7 @@ public abstract class Unit extends Tile implements Attacker, Combatant, Defender
     @Override
     public Result defend() {
         int defenseRoll = (int)(Math.random()*(defense)+1);
-        String output = this.name + " rolled " + defense + " defense points.";
+        String output = this.name + " rolled " + defenseRoll + " defense points.";
         Result result = new Result(defenseRoll, output);
         return result;
     }

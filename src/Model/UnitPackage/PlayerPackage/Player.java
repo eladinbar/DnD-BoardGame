@@ -3,6 +3,7 @@ package Model.UnitPackage.PlayerPackage;
 import Controller.ActionListInput;
 import Model.ANSIColors;
 import Model.Result;
+import Model.UnitPackage.CombatResult;
 import Model.UnitPackage.TickListener;
 import Model.TilePackage.EmptyTile;
 import Model.TilePackage.Tile;
@@ -30,17 +31,16 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     }
 
     private String gainExp(Integer experienceValue) {
-        String output = "";
-        if (experience + experienceValue >= experienceThreshold) {
-            output += this.levelUp();
-        }
-        else
-            experience += experienceValue;
+        String output = " died. " + this.getName() + " gained " + experienceValue + " experience.";
+        experience += experienceValue;
+        if (experience >= experienceThreshold)
+            output += "\n" + this.levelUp();
         return output;
     }
 
     public String levelUp() {
         experience -= 50 * level;
+        experienceThreshold += 50;
         level++;
         healthPool += 10 * level;
         currentHealth = healthPool;
@@ -68,6 +68,8 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
             }
         }
         if (!this.position.equals(originalPosition)) {
+            if (layout[this.position.x][this.position.y].getPosition()==null)
+                enemies.remove(layout[this.position.x][this.position.y]);
             layout[this.position.x][this.position.y] = this;
             layout[originalPosition.x][originalPosition.y] = new EmptyTile(originalPosition);
         }
@@ -181,16 +183,17 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " dealt " + Math.max(damage, 0) + " damage  to " + enemy.getName() + ANSIColors.RESET.value();
         if (damage > 0)
             enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
-        if (enemy.getCurrentHealth() <= 0)
-            this.kill(enemy);
+        if (enemy.getCurrentHealth() <= 0) {
+            combatResult += "\n" + this.kill(enemy);
+            this.setPosition(enemy.getPosition());
+            enemy.setPosition(null);
+        }
         return combatResult;
     }
 
-    protected void kill(Enemy enemy) {
-        this.gainExp(enemy.getExperienceValue());
-//        EmptyTile et = new EmptyTile(this.position);
-        this.setPosition(enemy.getPosition());
-//        enemy.setPosition(null);
+    protected String kill(Enemy enemy) {
+        String output = enemy.getName() + this.gainExp(enemy.getExperienceValue());
+        return output;
     }
 
     public void die() {
@@ -198,6 +201,6 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     }
 
     public String toString() {
-        return ANSIColors.GREEN.value() + "" + symbol + ANSIColors.RESET.value();
+        return ANSIColors.GREEN.value() + symbol + ANSIColors.RESET.value();
     }
 }

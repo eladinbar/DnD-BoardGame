@@ -54,8 +54,10 @@ public class Rogue extends Player {
                 combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
                 if (damage > 0)
                     enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
-                if (enemy.getCurrentHealth() <= 0)
-                    this.kill(enemy);
+                if (enemy.getCurrentHealth() <= 0) {
+                    combatResult += "\n" + this.kill(enemy);
+                    enemy.setPosition(null);
+                }
             }
             //For each enemy within range < 2, deal damage equal to the rogue’s
             //attack points (each enemy will try to defend itself).

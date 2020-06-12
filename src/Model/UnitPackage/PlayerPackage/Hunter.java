@@ -32,7 +32,7 @@ public class Hunter extends Player {
         arrowsCount += 10 * level;
         attack += 2 * level;
         defense += level;
-        return output + "+" + 10*level + " Health, " + "+" + 6*level + "Attack, " + "+" + 2*level + "Defense, " + "+" + 10*level + " Arrows " + ANSIColors.RESET.value();
+        return output + "+" + 10*level + " Health, " + "+" + 6*level + " Attack, " + "+" + 2*level + " Defense, " + "+" + 10*level + " Arrows " + ANSIColors.RESET.value();
     }
 
     public void onGameTick() {
@@ -66,8 +66,10 @@ public class Hunter extends Player {
             combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + closestEnemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
             if (damage > 0)
                 closestEnemy.setCurrentHealth(closestEnemy.getCurrentHealth() - damage);
-            if (closestEnemy.getCurrentHealth() <= 0)
-                this.kill(closestEnemy);
+            if (closestEnemy.getCurrentHealth() <= 0) {
+                combatResult += "\n" + this.kill(closestEnemy);
+                closestEnemy.setPosition(null);
+            }
             arrowsCount--;
         }
         //Deal damage equal to attack points to the closest enemy within range (The enemy will try to

@@ -32,9 +32,10 @@ public class Warrior extends Player {
         String output = super.levelUp();
         remainingCooldown = 0;
         healthPool += 5 * level;
+        currentHealth = healthPool;
         attack += 2 * level;
         defense += level;
-        return output + "+" + 15*level + " Health, " + "+" + 6*level + "Attack, " + "+" + 2*level + "Defense" + ANSIColors.RESET.value();
+        return output + "+" + 15*level + " Health, " + "+" + 6*level + " Attack, " + "+" + 2*level + " Defense" + ANSIColors.RESET.value();
     }
 
     public void onGameTick() {
@@ -58,8 +59,10 @@ public class Warrior extends Player {
                 combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " hit " + enemy.getName() + " for " + Math.max(damage, 0) + " ability damage." + ANSIColors.RESET.value();
                 if (damage > 0)
                     enemy.setCurrentHealth(enemy.getCurrentHealth() - damage);
-                if (enemy.getCurrentHealth() <= 0)
-                    this.kill(enemy);
+                if (enemy.getCurrentHealth() <= 0) {
+                    combatResult += "\n" + this.kill(enemy);
+                    enemy.setPosition(null);
+                }
             }
             //Special ability: Avenger’s Shield, randomly hits one enemy within range < 3 for an amount that
             //equals to 10% of the warrior’s max health and heals the warrior for an amount equal to (10×defense)
