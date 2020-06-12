@@ -9,6 +9,8 @@ public class CombatInfo implements GameInfo {
 
     @Override
     public void printInfo() {
-
+        if(!combatResult.isEmpty()){
+            System.out.println(combatResult);
+        }
     }
 }

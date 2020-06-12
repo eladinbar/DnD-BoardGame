@@ -15,6 +15,7 @@ public class Main {
 
         CommandLineInterface CLI = new CommandLineInterface(levelsPath);
         CLI.start();
+        CLI.play();
 
     }
 }

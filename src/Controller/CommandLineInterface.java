@@ -29,7 +29,7 @@ public class CommandLineInterface {
         }
         controller = new GameController(chosenPlayer);
         controller.loadLevel(getNextLevelPath());
-        play();
+        
     }
 
     public void play() {

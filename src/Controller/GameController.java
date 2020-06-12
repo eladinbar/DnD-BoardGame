@@ -4,6 +4,7 @@ import Controller.LevelCreationPackage.LevelCreator;
 import Model.UnitPackage.EnemyPackage.Enemy;
 import Model.UnitPackage.PlayerPackage.Player;
 import Model.UnitPackage.TickListener;
+import View.CombatInfo;
 import View.Level;
 
 import java.util.ArrayList;
@@ -75,18 +76,22 @@ public class GameController implements TickManager, DeathObserver{
         return true;
     }
 
-    private void playerTurn(ActionListInput chosenAction){
-        currentPlayer.onPlayerTurn(currentDungeonLevel.getBoard().getLayout(), chosenAction, currentDungeonLevel.getEnemyList());
+    private CombatInfo playerTurn(ActionListInput chosenAction){
+        String result = currentPlayer.onPlayerTurn(currentDungeonLevel.getBoard().getLayout(), chosenAction, currentDungeonLevel.getEnemyList());
+        CombatInfo playerTurnInfo = new CombatInfo(result);
+        return playerTurnInfo;
     }
 
     private void enemiesTurn(){
         for (Enemy e : currentDungeonLevel.getEnemyList()) {
-            e.onEnemyTurn(currentDungeonLevel.getBoard().getLayout(), currentPlayer);
+            String result = e.onEnemyTurn(currentDungeonLevel.getBoard().getLayout(), currentPlayer);
+            CombatInfo enemyTurnInfo = new CombatInfo(result);
+            enemyTurnInfo.printInfo();
         }
     }
 
     public void round(ActionListInput chosenAction){
-        playerTurn(chosenAction);
+        playerTurn(chosenAction).printInfo();
         enemiesTurn();
         notifyListeners();
         gameStatusPrint();
