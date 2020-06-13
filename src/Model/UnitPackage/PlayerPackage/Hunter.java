@@ -28,24 +28,6 @@ public class Hunter extends Player {
     }
 
     @Override
-    public String levelUp() {
-        String output = super.levelUp();
-        arrowsCount += 10 * level;
-        attack += 2 * level;
-        defense += level;
-        return output + "+" + 10*level + " Health, " + "+" + 6*level + " Attack, " + "+" + 2*level + " Defense, " + "+" + 10*level + " Arrows " + ANSIColors.RESET.value();
-    }
-
-    public void onGameTick() {
-        if (ticksCount == 10) {
-            arrowsCount += level;
-            ticksCount = 0;
-        }
-        else
-            ticksCount++;
-    }
-
-    @Override
     public String castAbility(Tile[][] layout, List<Enemy> enemies) throws Exception {
         //Special ability: Shoot, hits the closest enemy for an amount that equals to the hunter’s attack points at
         //the cost of an arrow.
@@ -77,6 +59,24 @@ public class Hunter extends Player {
         //Deal damage equal to attack points to the closest enemy within range (The enemy will try to
         //defend itself).
         return combatResult;
+    }
+
+    public void onGameTick() {
+        if (ticksCount == 10) {
+            arrowsCount += level;
+            ticksCount = 0;
+        }
+        else
+            ticksCount++;
+    }
+
+    @Override
+    protected String levelUp() {
+        String output = super.levelUp();
+        arrowsCount += 10 * level;
+        attack += 2 * level;
+        defense += level;
+        return output + "+" + 10*level + " Health, " + "+" + 6*level + " Attack, " + "+" + 2*level + " Defense, " + "+" + 10*level + " Arrows " + ANSIColors.RESET.value();
     }
 
     @Override

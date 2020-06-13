@@ -18,11 +18,6 @@ public abstract class Tile implements Visited {
         return position;
     }
 
-    @Override
-    public String toString() {
-        return "" + symbol;
-    }
-
     public void setPosition(Point position) {
         this.position = position;
     }
@@ -31,5 +26,10 @@ public abstract class Tile implements Visited {
         Point originalPosition = this.position;
         this.position = other.position;
         other.position = originalPosition;
+    }
+
+    @Override
+    public String toString() {
+        return "" + symbol;
     }
 }

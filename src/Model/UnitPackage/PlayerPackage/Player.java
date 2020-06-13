@@ -30,25 +30,6 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         this.experienceThreshold = 50 * level;
     }
 
-    private String gainExp(Integer experienceValue) {
-        String output = " died. " + this.getName() + " gained " + experienceValue + " experience.";
-        experience += experienceValue;
-        if (experience >= experienceThreshold)
-            output += "\n" + this.levelUp();
-        return output;
-    }
-
-    public String levelUp() {
-        experience -= 50 * level;
-        experienceThreshold += 50;
-        level++;
-        healthPool += 10 * level;
-        currentHealth = healthPool;
-        attack += 4 * level;
-        defense += level;
-        return ANSIColors.BRIGHT_YELLOW.value() + name + " reached level " + level + ": ";
-    }
-
     public String onPlayerTurn(Tile[][] layout, ActionListInput action, List<Enemy> enemies) {
         Point originalPosition = this.position;
         String output="";
@@ -74,37 +55,6 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
             layout[originalPosition.x][originalPosition.y] = new EmptyTile(originalPosition);
         }
         return output;
-    }
-
-    protected List<Enemy> getAllEnemiesInRange(List<Enemy> enemies, int range) {
-        List<Enemy> enemiesInRange = new ArrayList<>();
-        for (Enemy enemy : enemies) {
-            if (this.range(enemy) < range)
-                enemiesInRange.add(enemy);
-        }
-        return enemiesInRange;
-    }
-
-    protected Enemy chooseRandomEnemy(List<Enemy> enemies, int range) {
-        List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, range);
-        if (!enemiesInRange.isEmpty()) {
-            int random = (int) Math.random() * enemiesInRange.size();
-            return enemiesInRange.get(random);
-        }
-        return null;
-    }
-
-    protected Enemy getClosestEnemyInRange(List<Enemy> enemies, int range) {
-        Enemy closestEnemy = null;
-        double closestRange = Double.MAX_VALUE;
-        for (Enemy enemy : enemies) {
-            double currentRange = this.range(enemy);
-            if (currentRange < closestRange) {
-                closestRange = currentRange;
-                closestEnemy = enemy;
-            }
-        }
-        return closestEnemy;
     }
 
     protected String moveLeft(Tile[][] layout) {
@@ -158,11 +108,6 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     }
 
     @Override
-    public String visit(Wall wall) {
-        return ""; //Do nothing
-    }
-
-    @Override
     public String visit(EmptyTile emptyTile) {
         this.switchPosition(emptyTile);
         return "";
@@ -171,8 +116,8 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     @Override
     public String engage(Enemy enemy) {
         String combatResult = ANSIColors.GREEN.value() + this.name + " engaged in combat with " + enemy.getName() + ANSIColors.RESET.value()
-                                + "\n" + ANSIColors.BRIGHT_BLUE.value() + this.describe() + ANSIColors.RESET.value()
-                                + "\n" + ANSIColors.BLUE.value() + enemy.describe() + ANSIColors.RESET.value();
+                + "\n" + ANSIColors.BRIGHT_BLUE.value() + this.describe() + ANSIColors.RESET.value()
+                + "\n" + ANSIColors.BLUE.value() + enemy.describe() + ANSIColors.RESET.value();
         Result attackResult = this.attack();
         int attackRoll = attackResult.getDiceRoll();
         combatResult += "\n" + attackResult.getOutput();
@@ -198,6 +143,56 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
 
     public void die() {
         this.symbol = PlayerStatus.DEAD.getPlayerStatus();
+    }
+
+    private String gainExp(Integer experienceValue) {
+        String output = " died. " + this.getName() + " gained " + experienceValue + " experience.";
+        experience += experienceValue;
+        if (experience >= experienceThreshold)
+            output += "\n" + this.levelUp();
+        return output;
+    }
+
+    protected String levelUp() {
+        experience -= 50 * level;
+        experienceThreshold += 50;
+        level++;
+        healthPool += 10 * level;
+        currentHealth = healthPool;
+        attack += 4 * level;
+        defense += level;
+        return ANSIColors.BRIGHT_YELLOW.value() + name + " reached level " + level + ": ";
+    }
+
+    protected List<Enemy> getAllEnemiesInRange(List<Enemy> enemies, int range) {
+        List<Enemy> enemiesInRange = new ArrayList<>();
+        for (Enemy enemy : enemies) {
+            if (this.range(enemy) < range)
+                enemiesInRange.add(enemy);
+        }
+        return enemiesInRange;
+    }
+
+    protected Enemy chooseRandomEnemy(List<Enemy> enemies, int range) {
+        List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, range);
+        if (!enemiesInRange.isEmpty()) {
+            int random = (int) Math.random() * enemiesInRange.size();
+            return enemiesInRange.get(random);
+        }
+        return null;
+    }
+
+    protected Enemy getClosestEnemyInRange(List<Enemy> enemies, int range) {
+        Enemy closestEnemy = null;
+        double closestRange = Double.MAX_VALUE;
+        for (Enemy enemy : enemies) {
+            double currentRange = this.range(enemy);
+            if (currentRange < closestRange) {
+                closestRange = currentRange;
+                closestEnemy = enemy;
+            }
+        }
+        return closestEnemy;
     }
 
     public String toString() {

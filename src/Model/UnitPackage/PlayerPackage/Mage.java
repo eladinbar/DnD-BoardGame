@@ -10,8 +10,6 @@ import java.awt.Point;
 import java.util.List;
 
 public class Mage extends Player {
-    //Special ability: Blizzard, randomly hit enemies within range for an amount equals to the mage’s
-    //spell power at the cost of mana.
     private Integer manaPool;
     private Integer currentMana;
     private Integer manaCost;
@@ -35,20 +33,9 @@ public class Mage extends Player {
     }
 
     @Override
-    public String levelUp() {
-        String output = super.levelUp();
-        manaPool += 25 * level;
-        currentMana = Math.min(currentMana + manaPool/4, manaPool);
-        spellPower += 10 * level;
-        return output + "+" + 10*level + " Health, " + "+" + 25*level + " Mana, " + "+" + 4*level + " Attack, " + "+" + level + " Defense," + "+" + 10*level + " Spellpower" + ANSIColors.RESET.value();
-    }
-
-    public void onGameTick() {
-        this.setCurrentMana(currentMana + level);;
-    }
-
-    @Override
     public String castAbility(Tile[][] layout, List<Enemy> enemies) throws Exception {
+        //Special ability: Blizzard, randomly hit enemies within range for an amount equals to the mage’s
+        //spell power at the cost of mana.
         if (currentMana < manaCost)
             throw new Exception(name + " tried to case Blizzard but does not have enough mana. " + (manaCost-currentMana) + " more mana is required to cast the ability.");
         else {
@@ -82,15 +69,29 @@ public class Mage extends Player {
         }
     }
 
+    public void onGameTick() {
+        this.setCurrentMana(currentMana + level);;
+    }
+
+    @Override
+    protected String levelUp() {
+        String output = super.levelUp();
+        manaPool += 25 * level;
+        currentMana = Math.min(currentMana + manaPool/4, manaPool);
+        spellPower += 10 * level;
+        return output + "+" + 10*level + " Health, " + "+" + 25*level + " Mana, " + "+" + 4*level + " Attack, " + "+" + level + " Defense," + "+" + 10*level + " Spellpower" + ANSIColors.RESET.value();
+    }
+
+    public void setCurrentMana(Integer currentMana) {
+        this.currentMana = Math.min(currentMana, manaPool);
+    }
+
+
     @Override
     public String describe() {
         return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%14s", "Attack: ") + attack + String.format("%14s", "Defense: ")
                 + defense + String.format("%14s", "Level: ") + level + String.format("%17s", "Experience: ") + experience+"/"+experienceThreshold +
                 String.format("%13s", "Mana: ") + currentMana+"/"+manaPool+" " + String.format("%16s", "Spell Power: ") + spellPower;
         //returns full information on the current unit.
-    }
-
-    public void setCurrentMana(Integer currentMana) {
-        this.currentMana = Math.min(currentMana, manaPool);
     }
 }

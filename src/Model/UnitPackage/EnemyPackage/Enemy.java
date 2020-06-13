@@ -19,6 +19,11 @@ public abstract class Enemy extends Unit {
     public abstract String onEnemyTurn(Tile[][] layout, Player player);
 
     @Override
+    public void onGameTick() {
+
+    }
+
+    @Override
     public String accept(Visitor visitor) {
         return visitor.visit(this);
     }
@@ -45,10 +50,5 @@ public abstract class Enemy extends Unit {
 
     public Integer getExperienceValue() {
         return experienceValue;
-    }
-
-    @Override
-    public void onGameTick() {
-
     }
 }

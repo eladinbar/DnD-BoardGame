@@ -16,19 +16,7 @@ public abstract class Unit extends Tile implements Attacker, Combatant, Defender
         super(position);
     }
 
-    public String getName() {
-        return name;
-    }
-
     public abstract String describe();
-
-    public Integer getCurrentHealth() {
-        return currentHealth;
-    }
-
-    public void setCurrentHealth(Integer currentHealth) {
-        this.currentHealth = Math.min(currentHealth, healthPool);
-    }
 
     @Override
     public Result attack() {
@@ -44,5 +32,17 @@ public abstract class Unit extends Tile implements Attacker, Combatant, Defender
         String output = this.name + " rolled " + defenseRoll + " defense points.";
         Result result = new Result(defenseRoll, output);
         return result;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(Integer currentHealth) {
+        this.currentHealth = Math.max(Math.min(currentHealth, healthPool), 0);
     }
 }

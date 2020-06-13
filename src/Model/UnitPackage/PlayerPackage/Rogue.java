@@ -27,18 +27,6 @@ public class Rogue extends Player {
     }
 
     @Override
-    public String levelUp() {
-        String output = super.levelUp();
-        currentEnergy = 100;
-        attack += 3 * level;
-        return output + "+" + 10*level + " Health, " + "+" + 7*level + " Attack, " + "+" + level + " Defense" + ANSIColors.RESET.value();
-    }
-
-    public void onGameTick() {
-        setCurrentEnergy(currentEnergy + 10);
-    }
-
-    @Override
     public String castAbility(Tile[][] layout, List<Enemy> enemies) throws Exception {
         if (currentEnergy < energyCost) {
             throw new Exception(name + " tried to cast Fan of Knives but does not have enough energy. " + (energyCost-currentEnergy) + " more energy is required to cast the ability.");
@@ -67,15 +55,28 @@ public class Rogue extends Player {
         }
     }
 
+    public void onGameTick() {
+        setCurrentEnergy(currentEnergy + 10);
+    }
+
+
+    @Override
+    protected String levelUp() {
+        String output = super.levelUp();
+        currentEnergy = 100;
+        attack += 3 * level;
+        return output + "+" + 10*level + " Health, " + "+" + 7*level + " Attack, " + "+" + level + " Defense" + ANSIColors.RESET.value();
+    }
+
+    public void setCurrentEnergy(Integer currentEnergy) {
+        this.currentEnergy = Math.min(currentEnergy, 100);
+    }
+
     @Override
     public String describe() {
         return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%14s", "Attack: ") + attack + String.format("%14s", "Defense: ")
                 + defense + String.format("%14s", "Level: ") + level + String.format("%16s", "Experience: ") + experience+"/"+experienceThreshold +
                 String.format("%15s", "Energy: ") + currentEnergy+"/"+100;
         //returns full information on the current unit.
-    }
-
-    public void setCurrentEnergy(Integer currentEnergy) {
-        this.currentEnergy = Math.min(currentEnergy, 100);
     }
 }

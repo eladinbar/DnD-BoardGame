@@ -29,21 +29,6 @@ public class Warrior extends Player {
     }
 
     @Override
-    public String levelUp() {
-        String output = super.levelUp();
-        remainingCooldown = 0;
-        healthPool += 5 * level;
-        currentHealth = healthPool;
-        attack += 2 * level;
-        defense += level;
-        return output + "+" + 15*level + " Health, " + "+" + 6*level + " Attack, " + "+" + 2*level + " Defense" + ANSIColors.RESET.value();
-    }
-
-    public void onGameTick() {
-        setRemainingCooldown(remainingCooldown-1);
-    }
-
-    @Override
     public String castAbility(Tile[][] layout, List<Enemy> enemies) throws Exception {
         if (remainingCooldown>0)
             throw new Exception(name + " tried to cast Avenger's Shield but failed. Remaining cooldown is: " + remainingCooldown);
@@ -73,15 +58,30 @@ public class Warrior extends Player {
         }
     }
 
+    public void onGameTick() {
+        setRemainingCooldown(remainingCooldown-1);
+    }
+
+    @Override
+    protected String levelUp() {
+        String output = super.levelUp();
+        remainingCooldown = 0;
+        healthPool += 5 * level;
+        currentHealth = healthPool;
+        attack += 2 * level;
+        defense += level;
+        return output + "+" + 15*level + " Health, " + "+" + 6*level + " Attack, " + "+" + 2*level + " Defense" + ANSIColors.RESET.value();
+    }
+
+    public void setRemainingCooldown(Integer remainingCooldown) {
+        this.remainingCooldown = Math.max(remainingCooldown, 0);
+    }
+
     @Override
     public String describe() {
         return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%14s", "Attack: ") + attack + String.format("%14s", "Defense: ")
                 + defense + String.format("%14s", "Level: ") + level + String.format("%16s", "Experience: ") + experience+"/"+experienceThreshold +
                 String.format("%15s", "Cooldown: ") + remainingCooldown+"/"+abilityCooldown;
         //returns full information on the current unit.
-    }
-
-    public void setRemainingCooldown(Integer remainingCooldown) {
-        this.remainingCooldown = Math.max(remainingCooldown, 0);
     }
 }
