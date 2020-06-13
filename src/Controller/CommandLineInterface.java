@@ -35,6 +35,7 @@ public class CommandLineInterface {
     public void play() {
         while (controller.playerAlive()) {
             if (!controller.isEnemiesAlive() && hasNextLevel()) {
+                System.out.println("Continue To Next Level. \n Be Prepared!");
                 controller.loadLevel(getNextLevelPath());
                 continue;
             } else if(!controller.isEnemiesAlive() && !hasNextLevel()){
@@ -43,6 +44,8 @@ public class CommandLineInterface {
             }
            controller.round(getAction(receiveInput()));
         }
+        if(!controller.playerAlive())
+            System.out.println(ANSIColors.BRIGHT_MAGENTA.value() + "Y-O-U  A-R-E  D-E-A-D !! " + ANSIColors.RESET.value());
     }
 
     public ActionListInput getAction(Character c){

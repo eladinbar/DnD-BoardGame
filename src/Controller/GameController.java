@@ -3,6 +3,7 @@ package Controller;
 import Controller.LevelCreationPackage.LevelCreator;
 import Model.UnitPackage.EnemyPackage.Enemy;
 import Model.UnitPackage.PlayerPackage.Player;
+import Model.UnitPackage.PlayerPackage.PlayerStatus;
 import Model.UnitPackage.TickListener;
 import View.CombatInfo;
 import View.Level;
@@ -73,7 +74,7 @@ public class GameController implements TickManager, DeathObserver{
     }
 
     public boolean playerAlive(){
-        return true;
+        return currentPlayer.getPlayerStatus().equals(PlayerStatus.ALIVE);
     }
 
     private CombatInfo playerTurn(ActionListInput chosenAction){
