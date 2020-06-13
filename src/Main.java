@@ -11,7 +11,7 @@ public class Main {
         ArrayList<String> levelsPath = getLevelPaths(args[0]);
 
 
-        levelsPath.stream().forEach((x) -> System.out.println(x));
+        levelsPath.forEach((x) -> System.out.println(x));
 
         CommandLineInterface CLI = new CommandLineInterface(levelsPath);
         CLI.start();
@@ -22,8 +22,8 @@ public class Main {
         File levelFolder = new File(folderPath);
         String[] folderContent = levelFolder.list();
         ArrayList<String> levelsPath = new ArrayList<>();
-        for(int i = 0; i< folderContent.length; i++){
-            levelsPath.add(folderPath + "\\" +folderContent[i]);
+        for (String s : folderContent) {
+            levelsPath.add(folderPath + "\\" + s);
         }
         return levelsPath;
     }

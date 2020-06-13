@@ -82,28 +82,28 @@ public class CommandLineInterface {
 
     public void selectPlayer(Character c) {
         for (Warriors w : Warriors.values()) {
-            if (w.getMenuPosition() == (c.charValue() - 48)) {
+            if (w.getMenuPosition() == (c - 48)) {
                 chosenPlayer = new Warrior(null, w);
                 return;
             }
         }
 
         for (Mages m : Mages.values()) {
-            if (m.getMenuPosition() == (c.charValue() - 48)) {
+            if (m.getMenuPosition() == (c - 48)) {
                 chosenPlayer = new Mage(null, m);
                 return;
             }
         }
 
         for (Rogues r : Rogues.values()) {
-            if (r.getMenuPosition() == (c.charValue() - 48)) {
+            if (r.getMenuPosition() == (c - 48)) {
                 chosenPlayer = new Rogue(null, r);
                 return;
             }
         }
 
         for (Hunters h : Hunters.values()) {
-            if (h.getMenuPosition() == (c.charValue() - 48)) {
+            if (h.getMenuPosition() == (c - 48)) {
                 chosenPlayer = new Hunter(null, h);
                 return;
             }

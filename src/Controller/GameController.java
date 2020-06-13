@@ -11,7 +11,7 @@ import View.Level;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameController implements TickManager, DeathObserver{
+public class GameController implements TickManager{
     private Level currentDungeonLevel;
     private Player currentPlayer;
     private LevelCreator levelCreator;
@@ -24,16 +24,6 @@ public class GameController implements TickManager, DeathObserver{
         this.currentDungeonLevel = null;
         this.currentPlayer = chosenPlayer;
         this.listeners = new ArrayList<>();
-    }
-
-    @Override
-    public void update(Enemy enemy) {
-
-    }
-
-    @Override
-    public void update(Player player) {
-
     }
 
     @Override
