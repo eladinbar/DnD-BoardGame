@@ -77,7 +77,7 @@ public abstract class Monster extends Enemy implements Visitor {
     }
 
     protected String randomMovement(Tile[][] layout) {
-        int rand = (int)Math.random()*5;
+        int rand = (int)(Math.random()*5);
         switch(rand) {
             case 0:
                 return this.moveLeft(layout);
