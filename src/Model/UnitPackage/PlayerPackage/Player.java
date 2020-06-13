@@ -137,8 +137,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     }
 
     protected String kill(Enemy enemy) {
-        String output = enemy.getName() + this.gainExp(enemy.getExperienceValue());
-        return output;
+        return enemy.getName() + this.gainExp(enemy.getExperienceValue());
     }
 
     public void die() {
@@ -148,7 +147,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     private String gainExp(Integer experienceValue) {
         String output = " died. " + this.getName() + " gained " + experienceValue + " experience.";
         experience += experienceValue;
-        if (experience >= experienceThreshold)
+        while (experience >= experienceThreshold)
             output += "\n" + this.levelUp();
         return output;
     }
@@ -167,7 +166,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     protected List<Enemy> getAllEnemiesInRange(List<Enemy> enemies, int range) {
         List<Enemy> enemiesInRange = new ArrayList<>();
         for (Enemy enemy : enemies) {
-            if (this.range(enemy) < range)
+            if (this.range(enemy) <= range)
                 enemiesInRange.add(enemy);
         }
         return enemiesInRange;
@@ -176,7 +175,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     protected Enemy chooseRandomEnemy(List<Enemy> enemies, int range) {
         List<Enemy> enemiesInRange = getAllEnemiesInRange(enemies, range);
         if (!enemiesInRange.isEmpty()) {
-            int random = (int) Math.random() * enemiesInRange.size();
+            int random = (int) (Math.random() * enemiesInRange.size());
             return enemiesInRange.get(random);
         }
         return null;
@@ -187,7 +186,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         double closestRange = Double.MAX_VALUE;
         for (Enemy enemy : enemies) {
             double currentRange = this.range(enemy);
-            if (currentRange < closestRange) {
+            if (currentRange <= closestRange) {
                 closestRange = currentRange;
                 closestEnemy = enemy;
             }
@@ -196,12 +195,9 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
     }
 
     public PlayerStatus getPlayerStatus() {
-        switch(symbol) {
-            default:
-                return PlayerStatus.ALIVE;
-            case 'X':
-                return PlayerStatus.DEAD;
-        }
+        if (symbol == '@')
+            return PlayerStatus.ALIVE;
+        return PlayerStatus.DEAD;
     }
 
     public String toString() {

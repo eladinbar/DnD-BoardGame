@@ -85,7 +85,7 @@ public class Boss extends Monster implements HeroicUnit {
 
     @Override
     public void onGameTick() {
-
+        //Combat ticks are tied to on enemy turn functionality
     }
 
     @Override

@@ -70,7 +70,7 @@ public class Mage extends Player {
     }
 
     public void onGameTick() {
-        this.setCurrentMana(currentMana + level);;
+        this.setCurrentMana(currentMana + level);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Mage extends Player {
         manaPool += 25 * level;
         currentMana = Math.min(currentMana + manaPool/4, manaPool);
         spellPower += 10 * level;
-        return output + "+" + 10*level + " Health, " + "+" + 25*level + " Mana, " + "+" + 4*level + " Attack, " + "+" + level + " Defense," + "+" + 10*level + " Spellpower" + ANSIColors.RESET.value();
+        return output + "+" + 10*level + " Health, " + "+" + 25*level + " Mana, " + "+" + 4*level + " Attack, " + "+" + level + " Defense, " + "+" + 10*level + " Spellpower" + ANSIColors.RESET.value();
     }
 
     public void setCurrentMana(Integer currentMana) {

@@ -23,7 +23,7 @@ public class Minion extends Monster {
 
     @Override
     public void onGameTick() {
-
+        //No particular fields to update on game tick
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Minion extends Monster {
 //        – Movement rules described as follows:
         int dx; int dy;
         Point originalPosition = this.position;
-        String output = "";
+        String output;
         if (this.range(player) < visionRange) {
             dx = this.position.x - player.getPosition().x;
             dy = this.position.y - player.getPosition().y;
