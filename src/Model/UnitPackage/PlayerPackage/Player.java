@@ -195,6 +195,15 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         return closestEnemy;
     }
 
+    public PlayerStatus getPlayerStatus() {
+        switch(symbol) {
+            default:
+                return PlayerStatus.ALIVE;
+            case 'X':
+                return PlayerStatus.DEAD;
+        }
+    }
+
     public String toString() {
         return ANSIColors.GREEN.value() + symbol + ANSIColors.RESET.value();
     }
