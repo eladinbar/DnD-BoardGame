@@ -35,7 +35,7 @@ public abstract class Enemy extends Unit {
         int defenseRoll = defenseResult.getDiceRoll();
         combatResult += "\n" + defenseResult.getOutput();
         int damage = attackRoll - defenseRoll;
-        combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " dealt " + Math.max(damage, 0) + " damage  to " + player.getName() + ANSIColors.RESET.value();
+        combatResult += "\n" + ANSIColors.BOLD.value() + this.name + " dealt " + Math.max(damage, 0) + " damage to " + player.getName() + ANSIColors.RESET.value();
         if (damage > 0)
             player.setCurrentHealth(player.getCurrentHealth() - damage);
         if (player.getCurrentHealth() <= 0)

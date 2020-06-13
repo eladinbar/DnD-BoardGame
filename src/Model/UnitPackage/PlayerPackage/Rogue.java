@@ -71,7 +71,7 @@ public class Rogue extends Player {
     public String describe() {
         return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%14s", "Attack: ") + attack + String.format("%14s", "Defense: ")
                 + defense + String.format("%14s", "Level: ") + level + String.format("%16s", "Experience: ") + experience+"/"+experienceThreshold +
-                String.format("%15s", "Energy: ") + currentEnergy+"/"+energyCost;
+                String.format("%15s", "Energy: ") + currentEnergy+"/"+100;
         //returns full information on the current unit.
     }
 
