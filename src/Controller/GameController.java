@@ -27,16 +27,6 @@ public class GameController implements TickManager {
     }
 
     @Override
-    public void update(Enemy enemy) {
-
-    }
-
-    @Override
-    public void update(Player player) {
-
-    }
-
-    @Override
     public boolean addListener(TickListener listener) {
         if(listeners.contains(listener))
             return false;
