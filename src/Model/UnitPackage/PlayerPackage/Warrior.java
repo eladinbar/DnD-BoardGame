@@ -51,7 +51,7 @@ public class Warrior extends Player {
                     enemies.remove(enemy);
                 }
             }
-            //Special ability: Avenger’s Shield, randomly hits one enemy within range < 3 for an amount that
+            //Special ability: Avenger’s Shield, randomly hits one enemy within range <= 3 for an amount that
             //equals to 10% of the warrior’s max health and heals the warrior for an amount equal to (10×defense)
             //(but will not exceed the total amount of health pool).
             return combatResult;

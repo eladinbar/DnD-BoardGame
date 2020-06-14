@@ -49,7 +49,7 @@ public class Rogue extends Player {
                     enemies.remove(enemy);
                 }
             }
-            //For each enemy within range < 2, deal damage equal to the rogue’s
+            //For each enemy within range <= 2, deal damage equal to the rogue’s
             //attack points (each enemy will try to defend itself).
             return combatResult;
         }
