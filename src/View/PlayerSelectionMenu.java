@@ -26,8 +26,15 @@ public class PlayerSelectionMenu implements GameInfo {
 
     @Override
     public void printInfo() {
-        System.out.println("Welcome to \"Game of Thrones Dungeon\". Get ready for your quest.");
-        System.out.println("Choose Player: ");
+        System.out.println("Welcome to \"Game of Thrones Dungeon\"");
+        System.out.println("TThe Lannisters have been in hiding ever since the Mother of Dragons destroyed King's Landing.\n" +
+                "In that time a lady who claims to be Cerci Lannister, preformed a ritual and brought back to life (or more accurate back to undead) the horrible Night King.\n" +
+                "Together they’re rebuilding an army to take the Seven Kingdoms and claim the Iron Throne.\n" +
+                "\n" +
+                "a Intelligence report from lord Varis has Arrived reviling the location of the base where cerci and the Night King  are building their army.\n" +
+                "The need for a Hero who's willing to go to the base and take out the army and their Leaders.\n" +
+                "\n" +
+                "WHO WOULD YOU CHOOSE?");
         warriorsList.stream().forEach((x) -> System.out.println(x));
         magesList.stream().forEach((x) -> System.out.println(x));
         roguesList.stream().forEach((x) -> System.out.println(x));
