@@ -60,7 +60,7 @@ public class GameController implements TickManager {
 
     private void gameStatusPrint(){
         currentDungeonLevel.getBoard().printInfo();
-        System.out.println(currentPlayer.describe());
+        System.out.println("\n" + currentPlayer.describe());
     }
 
     public boolean playerAlive(){

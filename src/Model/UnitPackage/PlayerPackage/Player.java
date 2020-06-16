@@ -181,7 +181,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         return null;
     }
 
-    protected Enemy getClosestEnemyInRange(List<Enemy> enemies, int range) {
+    protected Enemy getClosestEnemyInRange(List<Enemy> enemies) {
         Enemy closestEnemy = null;
         double closestRange = Double.MAX_VALUE;
         for (Enemy enemy : enemies) {

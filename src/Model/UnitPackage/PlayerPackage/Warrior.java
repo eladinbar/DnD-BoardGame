@@ -7,7 +7,6 @@ import Model.TilePackage.Tile;
 import Model.UnitPackage.EnemyPackage.Enemy;
 
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Warrior extends Player {

@@ -26,15 +26,15 @@ public class PlayerSelectionMenu implements GameInfo {
 
     @Override
     public void printInfo() {
-        System.out.println("Welcome to \"Game of Thrones Dungeon\"");
-        System.out.println("TThe Lannisters have been in hiding ever since the Mother of Dragons destroyed King's Landing.\n" +
-                "In that time a lady who claims to be Cerci Lannister, preformed a ritual and brought back to life (or more accurate back to undead) the horrible Night King.\n" +
-                "Together they’re rebuilding an army to take the Seven Kingdoms and claim the Iron Throne.\n" +
+        System.out.println("Welcome to " + ANSIColors.BRIGHT_YELLOW.value() + "\"Game of Thrones Dungeon\"" + ANSIColors.RESET.value());
+        System.out.println("The Lannisters have been in hiding ever since the Mother of Dragons destroyed King's Landing.\n" +
+                "In that time, a lady who claims to be Cersei Lannister, performed a ritual and brought back to life (or more accurately, back to undeath) the horrible Night King.\n" +
+                "Together, they’re rebuilding an army to take the Seven Kingdoms and claim the Iron Throne.\n" +
                 "\n" +
-                "a Intelligence report from lord Varis has Arrived reviling the location of the base where cerci and the Night King  are building their army.\n" +
-                "The need for a Hero who's willing to go to the base and take out the army and their Leaders.\n" +
+                "An intelligence report from lord Varis has arrived revealing the location of the base where Cersei and the Night King are building their army.\n" +
+                "The need for a hero, who's willing to delve into their stronghold and take out the army and its leaders, is required!\n" +
                 "\n" +
-                "WHO WOULD YOU CHOOSE?");
+                "WHO WOULD YOU CHOOSE?\n");
         warriorsList.stream().forEach((x) -> System.out.println(x));
         magesList.stream().forEach((x) -> System.out.println(x));
         roguesList.stream().forEach((x) -> System.out.println(x));

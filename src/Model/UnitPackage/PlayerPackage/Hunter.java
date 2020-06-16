@@ -39,7 +39,7 @@ public class Hunter extends Player {
             throw new Exception(name + " tried to shoot but there were no enemies in range.");
 
         String combatResult = "";
-        Enemy closestEnemy = getClosestEnemyInRange(enemiesInRange, range);
+        Enemy closestEnemy = getClosestEnemyInRange(enemiesInRange);
         if (closestEnemy!=null) {
             combatResult = ANSIColors.CYAN.value() + name + " fired an arrow at " + closestEnemy.getName() + "." + ANSIColors.RESET.value();
             Result defenseResult = closestEnemy.defend();

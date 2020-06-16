@@ -3,7 +3,6 @@ package Model.UnitPackage.EnemyPackage;
 import Model.TilePackage.EmptyTile;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.Visitor;
-import Model.TilePackage.Wall;
 import Model.UnitPackage.PlayerPackage.Player;
 
 import java.awt.Point;

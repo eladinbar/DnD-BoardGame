@@ -35,7 +35,7 @@ public class CommandLineInterface {
     public void play() {
         while (controller.playerAlive()) {
             if (!controller.isEnemiesAlive() && hasNextLevel()) {
-                System.out.println("Continue To Next Level. \nBe Prepared!");
+                System.out.println("\nContinue To Next Level. \nBe Prepared!\n");
                 controller.loadLevel(getNextLevelPath());
                 continue;
             } else if(!controller.isEnemiesAlive() && !hasNextLevel()){

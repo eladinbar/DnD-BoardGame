@@ -42,7 +42,7 @@ public class Boss extends Monster implements HeroicUnit {
         Point originalPosition = this.position;
         String output="";
         double rangeFromPlayer = this.range(player);
-        if (combatTicks == abilityFrequency & rangeFromPlayer < abilityRange) {
+        if (combatTicks == abilityFrequency & rangeFromPlayer <= abilityRange) {
             combatTicks = 0;
             try {
                 output = this.castAbility(layout, player);
@@ -53,7 +53,7 @@ public class Boss extends Monster implements HeroicUnit {
 //          - The boss cast the ability: shooting at the player for an amount that equals to the boss's
 //            ability damage points if the player is within ability range (the player will try to defend himself).
         }
-        else if (rangeFromPlayer < visionRange) {
+        else if (rangeFromPlayer <= visionRange) {
             int dx, dy;
             if (combatTicks!=abilityFrequency)
                 combatTicks++;

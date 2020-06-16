@@ -6,12 +6,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-
-
         ArrayList<String> levelsPath = getLevelPaths(args[0]);
-
-
-        levelsPath.stream().forEach((x) -> System.out.println(x));
 
         CommandLineInterface CLI = new CommandLineInterface(levelsPath);
         CLI.start();
