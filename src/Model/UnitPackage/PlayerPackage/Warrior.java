@@ -10,9 +10,10 @@ import java.awt.Point;
 import java.util.List;
 
 public class Warrior extends Player {
+    private final int AVENGERS_SHIELD_RANGE = 3;
+
     private Integer abilityCooldown;
     private Integer remainingCooldown;
-    private final int AVENGERS_SHIELD_RANGE = 3;
 
     public Warrior(Point position, Warriors warrior) {
         super(position);
@@ -57,6 +58,7 @@ public class Warrior extends Player {
         }
     }
 
+    @Override
     public void onGameTick() {
         setRemainingCooldown(remainingCooldown-1);
     }

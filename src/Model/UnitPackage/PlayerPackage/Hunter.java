@@ -61,6 +61,7 @@ public class Hunter extends Player {
         return combatResult;
     }
 
+    @Override
     public void onGameTick() {
         if (ticksCount == 10) {
             arrowsCount += level;

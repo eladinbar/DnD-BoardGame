@@ -69,6 +69,7 @@ public class Mage extends Player {
         }
     }
 
+    @Override
     public void onGameTick() {
         this.setCurrentMana(currentMana + level);
     }

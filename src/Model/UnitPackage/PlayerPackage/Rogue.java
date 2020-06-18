@@ -10,9 +10,10 @@ import java.awt.Point;
 import java.util.List;
 
 public class Rogue extends Player {
+    private final int FAN_OF_KNIVES_RANGE = 2;
+
     private Integer energyCost;
     private Integer currentEnergy;
-    private final int FAN_OF_KNIVES_RANGE = 2;
 
     public Rogue(Point position, Rogues rogue) {
         super(position);
@@ -55,6 +56,7 @@ public class Rogue extends Player {
         }
     }
 
+    @Override
     public void onGameTick() {
         setCurrentEnergy(currentEnergy + 10);
     }

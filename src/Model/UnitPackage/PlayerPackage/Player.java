@@ -3,12 +3,10 @@ package Model.UnitPackage.PlayerPackage;
 import Controller.ActionListInput;
 import Model.ANSIColors;
 import Model.Result;
-import Model.UnitPackage.CombatResult;
 import Model.UnitPackage.TickListener;
 import Model.TilePackage.EmptyTile;
 import Model.TilePackage.Tile;
 import Model.UnitPackage.Visitor;
-import Model.TilePackage.Wall;
 import Model.UnitPackage.EnemyPackage.Enemy;
 import Model.UnitPackage.HeroicUnit;
 import Model.UnitPackage.Unit;
@@ -57,6 +55,26 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         return output;
     }
 
+    public String interact(Tile tile) {
+        return tile.accept(this);
+    }
+
+    @Override
+    public String accept(Visitor visitor) {
+        return visitor.visit(this);
+    }
+
+    @Override
+    public String visit(Enemy enemy) {
+        return this.engage(enemy);
+    }
+
+    @Override
+    public String visit(EmptyTile emptyTile) {
+        this.switchPosition(emptyTile);
+        return "";
+    }
+
     protected String moveLeft(Tile[][] layout) {
         try {
             return this.interact(layout[this.position.x - 1][this.position.y]);
@@ -91,26 +109,6 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         catch (ArrayIndexOutOfBoundsException ex) {
             return ""; //Do nothing
         }
-    }
-
-    public String interact(Tile tile) {
-        return tile.accept(this);
-    }
-
-    @Override
-    public String accept(Visitor visitor) {
-        return visitor.visit(this);
-    }
-
-    @Override
-    public String visit(Enemy enemy) {
-        return this.engage(enemy);
-    }
-
-    @Override
-    public String visit(EmptyTile emptyTile) {
-        this.switchPosition(emptyTile);
-        return "";
     }
 
     @Override
@@ -181,10 +179,10 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         return null;
     }
 
-    protected Enemy getClosestEnemyInRange(List<Enemy> enemies) {
+    protected Enemy getClosestEnemyInRange(List<Enemy> enemiesInRange) {
         Enemy closestEnemy = null;
         double closestRange = Double.MAX_VALUE;
-        for (Enemy enemy : enemies) {
+        for (Enemy enemy : enemiesInRange) {
             double currentRange = this.range(enemy);
             if (currentRange <= closestRange) {
                 closestRange = currentRange;
@@ -200,6 +198,7 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         return PlayerStatus.DEAD;
     }
 
+    @Override
     public String toString() {
         return ANSIColors.GREEN.value() + symbol + ANSIColors.RESET.value();
     }
