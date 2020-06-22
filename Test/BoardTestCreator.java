@@ -32,6 +32,7 @@ public class BoardTestCreator {
 
     public void changePlayer(Player newPlayer) {
         newPlayer.setPosition(player.getPosition());
+        baseLevel.getBoard().getLayout()[player.getPosition().x][player.getPosition().y] = newPlayer;
         player = newPlayer;
     }
 
