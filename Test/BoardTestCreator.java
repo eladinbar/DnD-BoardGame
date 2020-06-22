@@ -13,7 +13,7 @@ import java.awt.*;
 public class BoardTestCreator {
 
     private Level baseLevel;
-    private final String path = "D:\\UProject\\POOP\\DnD-BoardGame\\Test\\TestBoard.txt";
+    private final String path = "C:\\Users\\eladi\\IdeaProjects\\DnD-BoardGame\\Test\\TestBoard.txt";
     private Player player;
 
     public BoardTestCreator() {
