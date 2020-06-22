@@ -8,8 +8,11 @@ import java.awt.Point;
 
 public class EnemyFactory implements AbstractTileFactory {
 
+    //creating an Enemy Object based on the received char.
+    // if the char is not a pre-determined Enemy creates an EmptyTile
     @Override
     public Tile getTile(char c, Point position) {
+
         switch (c) {
             case 's':
                 return new Minion(position, Minions.LANNISTER_SOLDIER);

@@ -23,16 +23,7 @@ public class LevelCreator {
         enemyList = new ArrayList<>();
     }
 
-    private List<String> readAllLines(String path) {
-        List<String> lines = Collections.emptyList();
-        try {
-            lines = Files.readAllLines(Paths.get(path));
-        } catch(IOException ex){
-            System.out.println("something went wrong with reading the file. Please restart the program\n" + ex.getMessage() + "\n" + ex.getStackTrace());
-        }
-        return lines;
-    }
-
+    //gets the level path and creates a game board according to to the txt lines of the level input.
     public Level decipherLevel(String levelPath, Player p){
         Level newLevel;
         List<String> rawLevelLines = readAllLines(levelPath);
@@ -44,6 +35,17 @@ public class LevelCreator {
          return newLevel;
     }
 
+    //creates a list represented as a string of each line in the text file.
+    private List<String> readAllLines(String path) {
+        List<String> lines = Collections.emptyList();
+        try {
+            lines = Files.readAllLines(Paths.get(path));
+        } catch(IOException ex){
+            System.out.println("something went wrong with reading the file. Please restart the program\n" + ex.getMessage() + "\n" + ex.getStackTrace());
+        }
+        return lines;
+    }
+    //creates the game board layout according to the received levelLines
     private Tile[][] createLayout(List<String> levelLines, int length, int width, Player p){
         Tile[][] layOut = new Tile[length][width];
         for (int j = 0; j < layOut[0].length; j++) {
@@ -53,18 +55,21 @@ public class LevelCreator {
                     toDecode = levelLines.get(j).charAt(i);
                 else
                     return null;
-                //determine if player or not
+                //determines what type of tile to create.
                 Point tilePlacement = new Point(i,j);
                 if(toDecode == '@') {
                     //Player case
+                    //Inserts the player in the current position in the layout and sets the chosen player position.
                     p.setPosition(tilePlacement);
                     layOut[i][j] = p;
                 } else if(toDecode == '#'){
                     //Wall Case
+                    //creates a wall
                     layOut[i][j] = new WallTileFactory().getTile(toDecode, tilePlacement);
 
                 }else if(toDecode == '.'){
                     //empty Tile Case
+                    //creates an emptyTile
                     layOut[i][j] = new EmptyTileFactory().getTile(toDecode,tilePlacement);
                 }
                 else{

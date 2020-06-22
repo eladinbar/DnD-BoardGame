@@ -26,6 +26,7 @@ public class GameController implements TickManager {
         this.listeners = new ArrayList<>();
     }
 
+    //add a listener to be notify when a tick\round has finished.
     @Override
     public boolean addListener(TickListener listener) {
         if(listeners.contains(listener))
@@ -36,6 +37,7 @@ public class GameController implements TickManager {
         }
     }
 
+    //notify that a round has finished to listeners.
     @Override
     public void notifyListeners() {
         for (TickListener l: this.listeners) {
@@ -44,6 +46,7 @@ public class GameController implements TickManager {
         levelTickCounter++;
     }
 
+    //loads the level according to @param levelPath.
     public void loadLevel(String levelPath){
         currentDungeonLevel = levelCreator.decipherLevel(levelPath, currentPlayer);
         listeners.add(currentPlayer);
@@ -54,6 +57,7 @@ public class GameController implements TickManager {
         gameStatusPrint();
     }
 
+    //returns true if the list of enemies of the current level is not empty.
     public boolean isEnemiesAlive(){
         return !currentDungeonLevel.getEnemyList().isEmpty();
     }
@@ -63,16 +67,19 @@ public class GameController implements TickManager {
         System.out.println("\n" + currentPlayer.describe());
     }
 
+    //return true if player status is ALIVE.
     public boolean playerAlive(){
         return currentPlayer.getPlayerStatus().equals(PlayerStatus.ALIVE);
     }
 
+    //returns the result of the player turn.
     private CombatInfo playerTurn(ActionListInput chosenAction){
         String result = currentPlayer.onPlayerTurn(currentDungeonLevel.getBoard().getLayout(), chosenAction, currentDungeonLevel.getEnemyList());
         CombatInfo playerTurnInfo = new CombatInfo(result);
         return playerTurnInfo;
     }
 
+    //preforming the enemy turns and prints the result.
     private void enemiesTurn(){
         for (Enemy e : currentDungeonLevel.getEnemyList()) {
             String result = e.onEnemyTurn(currentDungeonLevel.getBoard().getLayout(), currentPlayer);
@@ -81,6 +88,12 @@ public class GameController implements TickManager {
         }
     }
 
+    /* sets the flow of the game.
+    * flow:
+    * player takes a turn.
+    * enemies preform their turns.
+    * notifing all listeners that a tick was complete.
+    * */
     public void round(ActionListInput chosenAction){
         playerTurn(chosenAction).printInfo();
         enemiesTurn();
@@ -89,6 +102,7 @@ public class GameController implements TickManager {
         levelTickCounter++;
     }
 
+    //reset the tick counter for the level
     private void resetTickCounter(){
         levelTickCounter = 0;
     }

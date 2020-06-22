@@ -6,6 +6,7 @@ import Model.UnitPackage.PlayerPackage.*;
 import java.awt.Point;
 
 public class PlayerFactory implements AbstractTileFactory {
+    //creates the player according to the input 'c'.
     @Override
     public Tile getTile(char c, Point position) {
         Player selectedPlayer;

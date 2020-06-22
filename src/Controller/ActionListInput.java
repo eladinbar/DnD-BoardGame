@@ -1,5 +1,6 @@
 package Controller;
 
+//Enum for more readable code and flexibility to change the controls key.
 public enum ActionListInput{
 
     Up('w'),
