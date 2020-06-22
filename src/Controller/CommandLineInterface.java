@@ -3,6 +3,9 @@ package Controller;
 import Model.ANSIColors;
 import Model.UnitPackage.PlayerPackage.*;
 import View.PlayerSelectionMenu;
+
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,10 +16,10 @@ public class CommandLineInterface {
     private List<String> levelsPath;
     private Player chosenPlayer;
 
-    public CommandLineInterface(List<String> levelsPath) {
+    public CommandLineInterface(String folderPath) {
         controller = null;
         selectionMenu = new PlayerSelectionMenu();
-        this.levelsPath = levelsPath;
+        this.levelsPath = getLevelPaths(folderPath);
         chosenPlayer = null;
     }
 
@@ -108,5 +111,15 @@ public class CommandLineInterface {
                 return;
             }
         }
+    }
+
+    private ArrayList<String> getLevelPaths(String folderPath){
+        File levelFolder = new File(folderPath);
+        String[] folderContent = levelFolder.list();
+        ArrayList<String> levelsPath = new ArrayList<>();
+        for(int i = 0; i< folderContent.length; i++){
+            levelsPath.add(folderPath + "\\" +folderContent[i]);
+        }
+        return levelsPath;
     }
 }

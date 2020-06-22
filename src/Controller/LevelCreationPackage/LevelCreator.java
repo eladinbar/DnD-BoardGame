@@ -38,13 +38,13 @@ public class LevelCreator {
         List<String> rawLevelLines = readAllLines(levelPath);
         int boardLength = rawLevelLines.get(0).length();
         int boardWidth = rawLevelLines.size();
-        Tile[][] layOut = createLeyOut(rawLevelLines,boardLength,boardWidth, p);
+        Tile[][] layOut = createLayout(rawLevelLines,boardLength,boardWidth, p);
         GameBoard theGameBoard = new GameBoard(layOut);
          newLevel = new Level(theGameBoard,enemyList);
          return newLevel;
     }
 
-    public Tile[][] createLeyOut(List<String> levelLines, int length, int width, Player p){
+    private Tile[][] createLayout(List<String> levelLines, int length, int width, Player p){
         Tile[][] layOut = new Tile[length][width];
         for (int j = 0; j < layOut[0].length; j++) {
             for (int i = 0; i < layOut.length; i++) {
