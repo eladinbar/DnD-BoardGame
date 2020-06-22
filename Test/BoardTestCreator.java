@@ -6,6 +6,7 @@ import Model.UnitPackage.PlayerPackage.Player;
 import Model.UnitPackage.PlayerPackage.Warrior;
 import Model.UnitPackage.PlayerPackage.Warriors;
 import View.Level;
+import java.util.List;
 
 import java.awt.*;
 
@@ -20,9 +21,11 @@ public class BoardTestCreator {
         baseLevel = new LevelCreator().decipherLevel(path, player);
     }
 
-    public void insertEnemy(Enemy enemy, Point position) {
+    public void insertEnemy(Enemy enemy, Point position, List<Enemy> enemyList) {
         Tile[][] layout = baseLevel.getBoard().getLayout();
         layout[position.x][position.y] = enemy;
+        enemyList.add(enemy);
+
     }
 
     public void changePlayer(Player newPlayer) {
