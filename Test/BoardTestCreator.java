@@ -19,11 +19,13 @@ public class BoardTestCreator {
     public BoardTestCreator() {
         player = new Warrior(null, Warriors.JON_SNOW);
         baseLevel = new LevelCreator().decipherLevel(path, player);
+        getBaseLevel().getBoard().printInfo();
     }
 
     public void insertEnemy(Enemy enemy, Point position, List<Enemy> enemyList) {
         Tile[][] layout = baseLevel.getBoard().getLayout();
         layout[position.x][position.y] = enemy;
+        enemy.setPosition(position);
         enemyList.add(enemy);
 
     }
