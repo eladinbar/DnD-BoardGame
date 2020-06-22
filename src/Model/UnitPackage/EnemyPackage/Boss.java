@@ -89,7 +89,7 @@ public class Boss extends Monster implements HeroicUnit {
     }
 
     @Override
-    public String castAbility(Tile[][] layout, Player player) throws Exception {
+    public String castAbility(Tile[][] layout, Player player) {
         String combatResult = ANSIColors.BRIGHT_MAGENTA.value() + name + " cast " + abilityName + " at " + player.getName() + "." + ANSIColors.RESET.value();
         Result defenseResult = player.defend();
         int defenseRoll = defenseResult.getDiceRoll();

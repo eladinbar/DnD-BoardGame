@@ -13,15 +13,7 @@ public class Result {
         return diceRoll;
     }
 
-    public void setDiceRoll(int diceRoll) {
-        this.diceRoll = diceRoll;
-    }
-
     public String getOutput() {
         return output;
-    }
-
-    public void setOutput(String output) {
-        this.output = output;
     }
 }
