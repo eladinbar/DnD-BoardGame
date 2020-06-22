@@ -26,6 +26,20 @@ public class GameController implements TickManager {
         this.listeners = new ArrayList<>();
     }
 
+    /* sets the flow of the game.
+     * flow:
+     * player takes a turn.
+     * enemies preform their turns.
+     * notifing all listeners that a tick was complete.
+     * */
+    public void round(ActionListInput chosenAction){
+        playerTurn(chosenAction).printInfo();
+        enemiesTurn();
+        notifyListeners();
+        gameStatusPrint();
+        levelTickCounter++;
+    }
+
     //add a listener to be notify when a tick\round has finished.
     @Override
     public boolean addListener(TickListener listener) {
@@ -62,14 +76,14 @@ public class GameController implements TickManager {
         return !currentDungeonLevel.getEnemyList().isEmpty();
     }
 
-    private void gameStatusPrint(){
-        currentDungeonLevel.getBoard().printInfo();
-        System.out.println("\n" + currentPlayer.describe());
-    }
-
     //return true if player status is ALIVE.
     public boolean playerAlive(){
         return currentPlayer.getPlayerStatus().equals(PlayerStatus.ALIVE);
+    }
+
+    private void gameStatusPrint(){
+        currentDungeonLevel.getBoard().printInfo();
+        System.out.println("\n" + currentPlayer.describe());
     }
 
     //returns the result of the player turn.
@@ -86,20 +100,6 @@ public class GameController implements TickManager {
             CombatInfo enemyTurnInfo = new CombatInfo(result);
             enemyTurnInfo.printInfo();
         }
-    }
-
-    /* sets the flow of the game.
-    * flow:
-    * player takes a turn.
-    * enemies preform their turns.
-    * notifing all listeners that a tick was complete.
-    * */
-    public void round(ActionListInput chosenAction){
-        playerTurn(chosenAction).printInfo();
-        enemiesTurn();
-        notifyListeners();
-        gameStatusPrint();
-        levelTickCounter++;
     }
 
     //reset the tick counter for the level
