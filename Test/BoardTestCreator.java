@@ -11,7 +11,7 @@ import java.awt.Point;
 public class BoardTestCreator {
 
     private Level baseLevel;
-    private final String path = "C:\\Users\\eladi\\IdeaProjects\\DnD-BoardGame\\Test\\TestBoard.txt";
+    private final String path = System.getProperty("user.dir") + "\\Test\\TestBoard.txt";
     private Player player;
 
     public BoardTestCreator() {
@@ -61,7 +61,6 @@ public class BoardTestCreator {
                 layout[startPosition.x + i][startPosition.y] = new Wall(new Point(startPosition.x + i, startPosition.y));
             }
         }
-
     }
 
     public Level getBaseLevel() {
