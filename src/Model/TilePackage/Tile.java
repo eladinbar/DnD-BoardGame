@@ -10,7 +10,7 @@ public abstract class Tile implements Visited {
         this.position = position;
     }
 
-    protected double range(Tile other) {
+    public double range(Tile other) {
         return Math.sqrt(Math.pow(this.position.x - other.position.x, 2) + Math.pow(this.position.y - other.position.y, 2));
     }
 

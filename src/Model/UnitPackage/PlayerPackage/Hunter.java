@@ -80,6 +80,10 @@ public class Hunter extends Player {
         return output + "+" + 10*level + " Health, " + "+" + 6*level + " Attack, " + "+" + 2*level + " Defense, " + "+" + 10*level + " Arrows " + ANSIColors.RESET.value();
     }
 
+    public void setArrowsCount(Integer arrowsCount) {
+        this.arrowsCount = Math.max(arrowsCount, 0);
+    }
+
     @Override
     public String describe() {
         return String.format("%-15s", name) + "Health: " + currentHealth+"/"+healthPool + String.format("%14s", "Attack: ") + attack + String.format("%14s", "Defense: ")

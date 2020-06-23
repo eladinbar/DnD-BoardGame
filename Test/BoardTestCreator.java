@@ -2,13 +2,11 @@ import Controller.LevelCreationPackage.LevelCreator;
 import Model.TilePackage.Tile;
 import Model.TilePackage.Wall;
 import Model.UnitPackage.EnemyPackage.Enemy;
-import Model.UnitPackage.PlayerPackage.Player;
-import Model.UnitPackage.PlayerPackage.Warrior;
-import Model.UnitPackage.PlayerPackage.Warriors;
+import Model.UnitPackage.PlayerPackage.*;
 import View.Level;
 import java.util.List;
 
-import java.awt.*;
+import java.awt.Point;
 
 public class BoardTestCreator {
 
@@ -19,6 +17,7 @@ public class BoardTestCreator {
     public BoardTestCreator() {
         player = new Warrior(null, Warriors.JON_SNOW);
         baseLevel = new LevelCreator().decipherLevel(path, player);
+        System.out.println("Initial layout");
         getBaseLevel().getBoard().printInfo();
     }
 
@@ -30,9 +29,20 @@ public class BoardTestCreator {
 
     }
 
-    public void changePlayer(Player newPlayer) {
-        newPlayer.setPosition(player.getPosition());
-        player = newPlayer;
+    public void changePlayer(String newPlayer) {
+        switch(newPlayer) {
+            case "Mage":
+                player = new Mage(getPlayer().getPosition(), Mages.MELISANDRE);
+                break;
+            case "Rogue":
+                player = new Rogue(getPlayer().getPosition(), Rogues.BRONN);
+                break;
+            case "Hunter":
+                player = new Hunter(getPlayer().getPosition(), Hunters.YGRITTE);
+                break;
+            default:
+                player = new Warrior(getPlayer().getPosition(), Warriors.JON_SNOW);
+        }
     }
 
     public void insertWall(Point position) {

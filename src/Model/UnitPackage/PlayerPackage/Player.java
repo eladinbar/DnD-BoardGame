@@ -198,6 +198,14 @@ public abstract class Player extends Unit implements HeroicUnit, Visitor, TickLi
         return PlayerStatus.DEAD;
     }
 
+    public int getCurrentExp() {
+        return experience;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
     @Override
     public String toString() {
         return ANSIColors.GREEN.value() + symbol + ANSIColors.RESET.value();

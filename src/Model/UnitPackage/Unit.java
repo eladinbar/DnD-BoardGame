@@ -42,6 +42,10 @@ public abstract class Unit extends Tile implements Attacker, Combatant, Defender
         return currentHealth;
     }
 
+    public Integer getHealthPool() {
+        return healthPool;
+    }
+
     public void setCurrentHealth(Integer currentHealth) {
         this.currentHealth = Math.max(Math.min(currentHealth, healthPool), 0);
     }
